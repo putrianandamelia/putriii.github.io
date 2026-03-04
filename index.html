@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan OOP</title>
+
+<style>
+body{
+  margin:0;
+  padding:40px;
+  background:#0f0f14;
+  font-family:Arial, sans-serif;
+  color:white;
+}
+
+h1{
+  text-align:center;
+  color:#ff4da6;
+}
+
+.section{
+  border:2px solid #ff4da6;
+  padding:25px;
+  margin-bottom:40px;
+  border-radius:12px;
+  background:#1a1a22;
+}
+
+.preview-box{
+  background:black;
+  padding:20px;
+  border-radius:10px;
+  margin-top:15px;
+  color:#00ff88;
+  font-family:monospace;
+}
+
+.btn-run{
+  background:#ff4da6;
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  margin-top:15px;
+}
+
+.btn-run:hover{
+  background:#ff1a8c;
+}
+
+/* POPUP */
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  z-index:99999;
+  justify-content:center;
+  align-items:center;
+}
+
+.popup-box{
+  width:95%;
+  max-width:1000px;
+  background:#1a1a22;
+  padding:20px;
+  border-radius:10px;
+  position:relative;
+  border:2px solid #ff4da6;
+}
+
+.close{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:22px;
+  cursor:pointer;
+  color:#ff4da6;
+}
+
+iframe{
+  width:100%;
+  height:520px;
+  border:none;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>LAPORAN OOP</h1>
+
+<!-- PENGERTIAN -->
+<div class="section">
+<h2>Pengertian OOP</h2>
+<p>
+Object Oriented Programming (OOP) adalah metode pemrograman yang berfokus pada objek. 
+Program dibangun menggunakan class dan object yang memiliki data (atribut) dan perilaku (method).
+Tujuannya agar program lebih terstruktur, mudah dikembangkan, dan mudah dipahami.
+</p>
+</div>
+
+<!-- CLASS HEWAN -->
+<div class="section">
+<h2>Class Hewan</h2>
+
+<p>
+Class adalah cetakan untuk membuat object. Object adalah hasil dari class yang dapat digunakan dalam program.
+</p>
+
+<div class="preview-box">
+<pre>
+class Hewan {
+  String nama;
+
+  Hewan(this.nama);
+
+  void bersuara() {
+    print("$nama sedang bersuara...");
+  }
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openPopup('598ae52104c6319fa95a5ae2002d67a5')">
+Run di DartPad
+</button>
+</div>
+
+<!-- CLASS MAHASISWA -->
+<div class="section">
+<h2>Class Mahasiswa</h2>
+
+<p>
+Latihan ini bertujuan memahami pembuatan class dengan beberapa atribut.
+</p>
+
+<div class="preview-box">
+<pre>
+class Mahasiswa {
+  String nama;
+  String nim;
+  double ipk;
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openPopup('2c7908b57357a9639084988ed7a3550c')">
+Run di DartPad
+</button>
+</div>
+
+<!-- CONSTRUCTOR -->
+<div class="section">
+<h2>Constructor</h2>
+
+<p>
+Constructor adalah method khusus yang digunakan untuk memberi nilai awal pada object saat dibuat.
+</p>
+
+<div class="preview-box">
+<pre>
+class Car {
+  String? model;
+  String? color;
+
+  Car(this.model, this.color);
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openPopup('6580bfb376fe6cb931d6bb42573093d6')">
+Run di DartPad
+</button>
+</div>
+
+<!-- ENCAPSULATION -->
+<div class="section">
+<h2>Encapsulation</h2>
+
+<p>
+Encapsulation adalah konsep untuk melindungi data dalam class agar tidak bisa diakses langsung dari luar.
+</p>
+
+<div class="preview-box">
+<pre>
+class Person {
+  String _name;
+  int _age;
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openPopup('a4e2c1bfae522272e2f57e3da7113a69')">
+Run di DartPad
+</button>
+</div>
+
+<!-- THIS -->
+<div class="section">
+<h2>This Keyword</h2>
+
+<p>
+Kata kunci this digunakan untuk merujuk pada object yang sedang aktif di dalam class.
+</p>
+
+<div class="preview-box">
+<pre>
+class Product {
+  String nama;
+
+  Product(this.nama);
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openPopup('6d87ddec40cc22e109c908f5079f0ab6')">
+Run di DartPad
+</button>
+</div>
+
+<!-- PRODUK -->
+<div class="section">
+<h2>Class Produk</h2>
+
+<p>
+Latihan membuat class dengan constructor dan beberapa atribut.
+</p>
+
+<div class="preview-box">
+<pre>
+class Produk {
+  final String id;
+  final String nama;
+  final double harga;
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openPopup('bdc1f5d0ccd35f8d7b001d20f571d577')">
+Run di DartPad
+</button>
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <span class="close" onclick="closePopup()">❌</span>
+    <iframe id="dartFrame"></iframe>
+  </div>
+</div>
+
+<script>
+function openPopup(id){
+  document.getElementById("dartFrame").src =
+  "https://dartpad.dev/embed-dart.html?id=" + id;
+  document.getElementById("popup").style.display="flex";
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display="none";
+  document.getElementById("dartFrame").src="";
+}
+</script>
+
+</body>
+</html>
