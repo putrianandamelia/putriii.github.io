@@ -6,14 +6,19 @@
 <title>Konstruktor dan Enkapsulasi dalam Pemrograman Dart</title>
 
 <style>
+
 body{
   margin:0;
   padding:20px;
-  max-width:1200px;
-  margin:auto;
   background:#0f0f14;
   font-family:Arial, sans-serif;
   color:white;
+}
+
+/* CONTAINER SUPAYA HALAMAN LEBAR */
+.container{
+  max-width:1200px;
+  margin:auto;
 }
 
 h1{
@@ -21,7 +26,7 @@ h1{
   color:#ff4da6;
 }
 
-  .identitas{
+.identitas{
   text-align:center;
   color:#ff99cc;
   margin-bottom:30px;
@@ -36,17 +41,22 @@ h1{
   background:#1a1a22;
 }
 
+/* CODE BOX SEPERTI EDITOR */
 .preview-box{
-  background:black;
-  padding:20px;
-  border-radius:10px;
+  background:#0b0b0f;
+  border:1px solid #333;
+  padding:18px;
+  border-radius:8px;
   margin-top:15px;
-  color:#00ff88;
   font-family:monospace;
   font-size:14px;
-  line-height:1.5;
+  line-height:1.6;
   overflow-x:auto;
-  overflow-wrap: break-word;
+  color:#00ff88;
+}
+
+pre{
+  margin:0;
   white-space:pre;
 }
 
@@ -66,19 +76,21 @@ h1{
 }
 
 /* POPUP */
+
 .popup{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.85);
+  background:rgba(0,0,0,0.9);
   z-index:99999;
   justify-content:center;
   align-items:center;
 }
 
 .popup-box{
-  width:96%;
-  max-width:12000px;
+  width:95%;
+  max-width:1300px;
+  height:90vh;
   background:#1a1a22;
   padding:20px;
   border-radius:10px;
@@ -97,14 +109,17 @@ h1{
 
 iframe{
   width:100%;
-  height:650px;
+  height:85vh;
   border:none;
   margin-top:20px;
 }
+
 </style>
 </head>
 
 <body>
+
+<div class="container">
 
 <h1>Konstruktor dan Enkapsulasi dalam Pemrograman Dart</h1>
 
@@ -114,33 +129,15 @@ NIM: 251410029 <br>
 Kelas: SI2A
 </div>
 
-<div class="section">
-<h2>Penjelasan Konstruktor dan Enkapsulasi</h2>
-<p>
-Dalam pemrograman berorientasi objek (OOP), terdapat beberapa konsep penting untuk mengatur struktur program agar lebih rapi dan mudah dipahami. Dua konsep yang sering digunakan adalah konstruktor dan enkapsulasi.
-Konstruktor merupakan method khusus dalam class yang digunakan untuk membuat atau menginisialisasi objek. Sedangkan enkapsulasi adalah teknik untuk melindungi data dalam class agar tidak dapat diakses langsung dari luar, biasanya menggunakan private variable, getter, dan setter.
-</div>
-
-<div class="section">
-<h2>Jenis-jenis Konstruktor Dart</h2>
-<p>
-Default Constructor, Named Constructor, Parameterized Constructor, Constant Constructor.
-</p>
-</div>
 
 <div class="section">
 <h2>Named Constructor (Class Mobil)</h2>
-<p>
-Constructor digunakan untuk menginisialisasi objek ketika class dipanggil. Pada Dart juga terdapat named constructor yang memungkinkan sebuah class memiliki lebih dari satu constructor dengan nama berbeda.
-</p>
-  
+
 <div class="preview-box">
 <pre>
 // Nama  : Putri Ananda Amelia
 // NIM   : 251410029
 // Kelas : SI2A
-  
-import 'dart:convert';
 
 class Mobil {
   String? merk;
@@ -164,66 +161,55 @@ class Mobil {
 }
 
 void main() {
-  print('--- Demonstrasi Class Mobil ---');
 
   var mobilA = Mobil('Honda', 2020);
-  print('Mobil A: $mobilA');
+  print(mobilA);
 
   var mobilB = Mobil.baru();
-  print('Mobil B: $mobilB');
+  print(mobilB);
 
-  String jsonString = '{"merk": "Suzuki", "tahun": 2021}';
-  Map<String, dynamic> jsonData = jsonDecode(jsonString);
+  var mobilC = Mobil.dariJson({"merk":"Suzuki","tahun":2021});
+  print(mobilC);
 
-  var mobilC = Mobil.dariJson(jsonData);
-  print('Mobil C: $mobilC');
-
-  Map<String, dynamic> anotherJsonData = {
-    'merk': 'Mitsubishi',
-    'tahun': 2022
-  };
-
-  var mobilD = Mobil.dariJson(anotherJsonData);
-  print('Mobil D: $mobilD');
-
-  print('--- Akhir Demonstrasi ---');
 }
 </pre>
 </div>
-  
+
 <button class="btn-run" onclick="openPopup('8db7157752dedc77228f2d0ef5c235c9')">
 Run di DartPad
 </button>
+
 </div>
 
+
+
 <div class="section">
-<h2>Constant Constructor ( Class Warna )</h2>
-<p>
-Constant constructor digunakan untuk membuat objek yang bersifat konstan atau tidak berubah. Constructor ini biasanya digunakan pada class yang semua atributnya bertipe final.
-</p>
-  
+<h2>Constant Constructor (Class Warna)</h2>
+
 <div class="preview-box">
 <pre>
 // Nama  : Putri Ananda Amelia
 // NIM   : 251410029
 // Kelas : SI2A
-  
+
 class Warna {
-  final int r, g, b;
+  final int r,g,b;
 
-  const Warna(this.r, this.g, this.b);
+  const Warna(this.r,this.g,this.b);
 
-  String toString() {
-    return 'Warna(r: $r, g: $g, b: $b)';
+  String toString(){
+    return 'Warna(r:$r g:$g b:$b)';
   }
 }
 
-void main() {
-  const merah = Warna(255, 0, 0);
-  const merahLagi = Warna(255, 0, 0);
+void main(){
+
+  const merah=Warna(255,0,0);
+  const merahLagi=Warna(255,0,0);
 
   print(merah);
   print(merahLagi);
+
 }
 </pre>
 </div>
@@ -231,42 +217,37 @@ void main() {
 <button class="btn-run" onclick="openPopup('1dfaf0a9e26a4288fa6a9ff2a52725e4')">
 Run di DartPad
 </button>
+
 </div>
 
+
+
 <div class="section">
-<h2>Initializer List ( Class Titik )</h2>
-<p>
-Initializer list digunakan untuk menginisialisasi nilai variabel sebelum constructor dijalankan. Biasanya digunakan pada variabel yang bertipe final.
-</p>
-  
+<h2>Initializer List (Class Titik)</h2>
+
 <div class="preview-box">
 <pre>
 // Nama  : Putri Ananda Amelia
 // NIM   : 251410029
 // Kelas : SI2A
-  
-class Titik {
-  final double x, y;
 
-  Titik(double x, double y)
-      : x = x.abs(),
-        y = y.abs() {
-    print('Titik dibuat di (${this.x}, ${this.y})');
-  }
+class Titik{
+
+ final double x,y;
+
+ Titik(double x,double y)
+  :x=x.abs(),
+   y=y.abs(){
+    print("Titik dibuat (${this.x},${this.y})");
+ }
+
 }
 
-void main() {
-  print('Membuat objek Titik pertama:');
-  var titik1 = Titik(3.0, 4.0);
-  print('Titik 1: x=${titik1.x}, y=${titik1.y}');
+void main(){
 
-  print('\nMembuat objek kedua dengan nilai negatif:');
-  var titik2 = Titik(-5.0, 10.0);
-  print('Titik 2: x=${titik2.x}, y=${titik2.y}');
+ var t1=Titik(3,4);
+ var t2=Titik(-5,10);
 
-  print('\nMembuat objek ketiga dengan nilai negatif di kedua koordinat:');
-  var titik3 = Titik(-1.5, -2.5);
-  print('Titik 3: x=${titik3.x}, y=${titik3.y}');
 }
 </pre>
 </div>
@@ -274,79 +255,45 @@ void main() {
 <button class="btn-run" onclick="openPopup('573cfbb85e054f59165865657799ae67')">
 Run di DartPad
 </button>
+
 </div>
 
+
+
 <div class="section">
-<h2>Class Person (Private Variable)</h2>
-<p>
-Dalam Dart, variabel yang diawali dengan tanda underscore (_) bersifat private sehingga tidak dapat diakses langsung dari luar class.
-</p>
-  
+<h2>Getter dan Setter</h2>
+
 <div class="preview-box">
 <pre>
 // Nama  : Putri Ananda Amelia
 // NIM   : 251410029
 // Kelas : SI2A
 
-class Person {
-  String _name;
-  int age;
+class Person{
 
-  Person(this._name, this.age);
+ String _name;
+ int age;
 
-  void tampilData() {
-    print("Nama: $_name");
-    print("Umur: $age");
-  }
+ Person(this._name,this.age);
+
+ String get nama => _name;
+
+ set nama(String value){
+   _name=value;
+ }
+
 }
 
-void main() {
-  Person person = Person("Putri", 19);
-  person.tampilData();
-}
-</pre>
-</div>
+void main(){
 
-<button class="btn-run" onclick="openPopup('300ae5bc42826d628dfa23f8757739e2')">
-Run di DartPad
-</button>
-</div>
+ var p=Person("Putri",19);
 
-<div class="section">
-<h2>Getter</h2>
-<p>
-Getter digunakan untuk mengambil nilai dari variabel private dalam sebuah class sehingga data tetap dapat diakses dengan cara yang lebih terkontrol.
-</p>
-  
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-  
-class Person {
-  String _name;
-  int age;
+ print(p.nama);
 
-  Person(this._name, this.age);
+ p.nama="Ananda";
 
-  String get getName1 {
-    return _name;
-  }
+ print(p.nama);
 
-  String getName() {
-    return _name;
-  }
-}
-
-void main() {
-  Person person = Person("Putri", 19);
-
-  print(person.age);
-  // print(person._name); // error karena private
-
-  print(person.getName());
-  print(person.getName1);
 }
 </pre>
 </div>
@@ -354,239 +301,10 @@ void main() {
 <button class="btn-run" onclick="openPopup('dd52cb3ac235fd4784d78e318eb72213')">
 Run di DartPad
 </button>
-</div>
 
-<div class="section">
-<h2>Setter</h2>
-<p>
-Setter digunakan untuk mengubah nilai variabel private dalam class dengan aturan tertentu sehingga perubahan data dapat dikontrol.
-</p>
-
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-  
-class Person {
-  String _name;
-  int age;
-
-  Person(this._name, this.age);
-
-  set setName1(String name) {
-    _name = name;
-  }
-
-  void setName(String name) {
-    _name = name;
-  }
-
-  String getName() {
-    return _name;
-  }
-}
-
-void main() {
-  Person person = Person("Putri", 19);
-
-  print(person.age);
-
-  person.setName('Ananda');
-  print(person.getName());
-
-  person.setName1 = 'Amelia';
-  print(person.getName());
-}
-</pre>
-</div>
-
-<button class="btn-run" onclick="openPopup('be972a6e65331f551e97e5cbbaea966d')">
-Run di DartPad
-</button>
-</div>
-
-<div class="section">
-<h2>Class Produk ( Getter & Setter Validasi )</h2>
-<p>
-Pada contoh ini, getter dan setter digunakan untuk mengatur akses terhadap data produk serta menambahkan validasi agar nilai yang dimasukkan tetap sesuai aturan.
-</p>
-  
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-  
-class Produk {
-  String _nama;
-  double _harga;
-
-  Produk(this._nama, this._harga);
-
-  String get nama => _nama;
-  double get harga => _harga;
-
-  set nama(String value) {
-    if (value.length >= 3) {
-      _nama = value;
-    } else {
-      print('Gagal memperbarui nama: minimal 3 karakter.');
-    }
-  }
-
-  set harga(double value) {
-    if (value > 0) {
-      _harga = value;
-    } else {
-      print('Gagal memperbarui harga: harus lebih dari 0.');
-    }
-  }
-}
-
-void main() {
-  var produk1 = Produk('Monitor Samsung', 3500.0);
-
-  print('Nama Produk: ${produk1.nama}');
-  print('Harga Produk: Rp ${produk1.harga}');
-
-  produk1.nama = 'Keyboard Mekanik';
-  produk1.harga = 1200.0;
-
-  print('Nama Produk baru: ${produk1.nama}');
-  print('Harga Produk baru: Rp ${produk1.harga}');
-}
-    
-</pre>
-</div>
-
-<button class="btn-run" onclick="openPopup('bc3b1c7fa249403720b462ccde2fe3ec')">
-Run di DartPad
-</button>
-</div>
-
-<div class="section">
-<h2>Class User ( Login & Ganti Password )</h2>
-<p>
-Contoh ini menunjukkan penerapan enkapsulasi pada sistem login sederhana, dimana username dan password disimpan sebagai variabel private dan proses login dilakukan melalui method dalam class.
-</p>
-  
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-class User {
-  String _username;
-  String _password;
-
-  User(this._username, this._password);
-
-  String get username => _username;
-
-  bool login(String username, String password) {
-    return _username == username && _password == password;
-  }
-
-  void gantiPassword(String lama, String baru) {
-    if (_password == lama) {
-      if (baru.length >= 8) {
-        _password = baru;
-        print('Password berhasil diubah.');
-      } else {
-        print('Password baru minimal 8 karakter.');
-      }
-    } else {
-      print('Password lama tidak sesuai.');
-    }
-  }
-}
-
-void main() {
-  final user1 = User('admin_user', 'securePass123');
-
-  print('User: ${user1.username}');
-
-  if (user1.login('admin_user', 'securePass123')) {
-    print('Login berhasil');
-  } else {
-    print('Login gagal');
-  }
-
-  user1.gantiPassword('securePass123', 'newSecurePass456');
-}
-</pre>
-</div>
-
-<button class="btn-run" onclick="openPopup('f5ec948876138fa4eb73b11b33af466e')">
-Run di DartPad
-</button>
 </div>
 
 
-
-<div class="section">
-<h2>Kesimpulan</h2>
-<p>
-Berdasarkan materi yang dipelajari, dapat disimpulkan bahwa constructor digunakan untuk menginisialisasi objek saat sebuah class dibuat. Dalam bahasa Dart terdapat beberapa jenis constructor seperti default constructor, named constructor, dan constant constructor yang dapat digunakan sesuai kebutuhan program.
-Selain itu, konsep enkapsulasi digunakan untuk melindungi data dalam sebuah class dengan membatasi akses langsung terhadap variabel menggunakan private variable, getter, dan setter. Dengan menerapkan konsep ini, program menjadi lebih terstruktur, aman, dan mudah dikelola.
-</p>
-</div>
-
-<div class="section">
-<h2>Tugas 1 Bonus 2: Class Rekening Bank</h2>
-<p>
-Program ini membuat kelas RekeningBank menggunakan konsep enkapsulasi dalam OOP.
-Kelas ini memiliki field private _nomorRekening dan _saldo.
-Terdapat method deposit(), tarik(), dan cekSaldo() untuk mengelola saldo dengan aman sehingga saldo tidak bisa menjadi neg
-</p>
-
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-  
-class RekeningBank {
-  String _nomorRekening;
-  double _saldo;
-
-  RekeningBank(this._nomorRekening, this._saldo);
-
-  void deposit(double jumlah) {
-    if (jumlah > 0) {
-      _saldo += jumlah;
-      print("Deposit berhasil: Rp$jumlah");
-    }
-  }
-
-  void tarik(double jumlah) {
-    if (jumlah > 0 && jumlah <= _saldo) {
-      _saldo -= jumlah;
-      print("Penarikan berhasil: Rp$jumlah");
-    }
-  }
-
-  void cekSaldo() {
-    print("Nomor Rekening: $_nomorRekening");
-    print("Saldo saat ini: Rp$_saldo");
-  }
-}
-
-void main() {
-  RekeningBank rekening = RekeningBank("4567890", 400000);
-
-  rekening.deposit(200000);
-  rekening.tarik(100000);
-  rekening.cekSaldo();
-}
-</pre>
-</div>
-
-<button class="btn-run" onclick="openPopup('8784a60a54a9528480ae4a77347fa97d')">
-Run di DartPad
-</button>
-</div>
 
 <div class="popup" id="popup">
   <div class="popup-box">
@@ -595,17 +313,27 @@ Run di DartPad
   </div>
 </div>
 
+</div>
+
 <script>
+
 function openPopup(id){
-  document.getElementById("dartFrame").src =
-  "https://dartpad.dev/embed-dart.html?id=" + id;
-  document.getElementById("popup").style.display="flex";
+
+document.getElementById("dartFrame").src=
+"https://dartpad.dev/embed-dart.html?id="+id;
+
+document.getElementById("popup").style.display="flex";
+
 }
 
 function closePopup(){
-  document.getElementById("popup").style.display="none";
-  document.getElementById("dartFrame").src="";
+
+document.getElementById("popup").style.display="none";
+
+document.getElementById("dartFrame").src="";
+
 }
+
 </script>
 
 </body>
