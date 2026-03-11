@@ -3,102 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laporan OOP</title>
+<title>Konstruktor dan Enkapsulasi dalam Pemrograman Dart</title>
 
 <style>
 
 body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg,#ffd6ec,#ffc2e2,#ffb3da);
+  margin:0;
+  padding:40px;
+  background:#0f0f14;
+  font-family:Arial, sans-serif;
+  color:white;
 }
 
-/* HEADER */
-
-header{
-    background:#ff7eb3;
-    color:white;
-    text-align:center;
-    padding:25px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.2);
+h1{
+  text-align:center;
+  color:#ff4da6;
 }
 
-header h1{
-    margin:0;
+.identitas{
+  text-align:center;
+  color:#ff99cc;
+  margin-bottom:30px;
+  line-height:1.8;
 }
 
-header p{
-    margin:5px;
+.section{
+  border:2px solid #ff4da6;
+  padding:25px;
+  margin-bottom:40px;
+  border-radius:12px;
+  background:#1a1a22;
 }
 
-
-/* CONTAINER */
-
-.container{
-    width:90%;
-    max-width:1100px;
-    margin:auto;
-    margin-top:30px;
+h2{
+  color:#ff4da6;
 }
 
-/* CARD */
-
-.card{
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    margin-bottom:25px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+.preview-box{
+  background:#000;
+  padding:25px;
+  border-radius:12px;
+  margin-top:20px;
+  color:#00ff88;
+  font-family:monospace;
+  font-size:14px;
+  line-height:1.6;
+  width:100%;
+  box-sizing:border-box;
+  overflow-x:auto;
 }
 
-.card h2{
-    color:#ff4fa3;
+.preview-box pre{
+  margin:0;
+  white-space:pre;
 }
 
-/* CODE BOX */
-
-.codebox{
-    background:#1e1e1e;
-    color:#00ff9c;
-    padding:15px;
-    border-radius:8px;
-    overflow-x:auto;
-    margin-top:10px;
-}
-
-/* BUTTON */
-
-button{
-    background:#ff4fa3;
-    border:none;
-    padding:10px 20px;
-    color:white;
-    border-radius:6px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-button:hover{
-    background:#ff2f93;
-}
-
-/* PREVIEW BOX */
-
-.preview{
-    background:#fff0f7;
-    border:2px solid #ff7eb3;
-    padding:20px;
-    border-radius:10px;
-    margin-top:15px;
-}
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    padding:20px;
-    margin-top:30px;
-    color:#444;
+iframe{
+  width:100%;
+  height:600px;
+  border:none;
+  margin-top:20px;
+  border-radius:10px;
 }
 
 </style>
@@ -106,133 +71,208 @@ footer{
 
 <body>
 
-<header>
-<h1>Laporan Object Oriented Programming</h1>
-<p>Nama : Putri Ananda</p>
-<p>NIM : 2442933939</p>
-<p>Kelas : SI2A</p>
-</header>
+<h1>Konstruktor dan Enkapsulasi dalam Pemrograman Dart</h1>
 
-<div class="container">
+<div class="identitas">
+Nama: Putri Ananda Amelia <br>
+NIM: 251410029 <br>
+Kelas: SI2A
+</div>
 
 
-<div class="card">
-<h2>Pengertian OOP</h2>
+<div class="section">
+<h2>Penjelasan Konstruktor dan Enkapsulasi</h2>
 
 <p>
-Object Oriented Programming (OOP) adalah metode pemrograman yang 
-menggunakan konsep objek. Dalam OOP program dibangun dari kumpulan objek 
-yang memiliki data dan fungsi. Konsep ini membantu membuat program lebih 
-terstruktur dan mudah dikembangkan.
+Dalam pemrograman berorientasi objek (OOP), terdapat beberapa konsep penting untuk mengatur struktur program agar lebih rapi dan mudah dipahami. 
+Dua konsep yang sering digunakan adalah konstruktor dan enkapsulasi.
+
+Konstruktor merupakan method khusus dalam class yang digunakan untuk membuat atau menginisialisasi objek. 
+Sedangkan enkapsulasi adalah teknik untuk melindungi data dalam class agar tidak dapat diakses langsung dari luar.
 </p>
 
 </div>
 
 
-<div class="card">
+<div class="section">
 
-<h2>Encapsulation</h2>
-
-<p>
-Encapsulation adalah proses membungkus data dan method dalam satu class 
-agar data tersebut terlindungi dan tidak dapat diakses secara langsung 
-dari luar class.
-</p>
-
-<div class="codebox">
-class Mahasiswa {
-  String nama;
-  int umur;
-
-  void tampilkan(){
-    print(nama);
-  }
-}
-</div>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>Inheritance</h2>
+<h2>Named Constructor (Class Mobil)</h2>
 
 <p>
-Inheritance adalah konsep pewarisan dimana sebuah class dapat mewarisi 
-atribut dan method dari class lain sehingga kode dapat digunakan kembali.
+Named constructor memungkinkan sebuah class memiliki lebih dari satu constructor dengan nama berbeda.
 </p>
 
-<div class="codebox">
-class Hewan{
-  void makan(){
-    print("Hewan sedang makan");
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'dart:convert';
+
+class Mobil {
+  String? merk;
+  int? tahun;
+
+  Mobil(this.merk, this.tahun);
+
+  Mobil.baru() {
+    merk = 'Toyota';
+    tahun = 2023;
+  }
+
+  Mobil.dariJson(Map<String, dynamic> json) {
+    merk = json['merk'];
+    tahun = json['tahun'];
+  }
+
+  String toString() {
+    return 'Mobil(merk: $merk, tahun: $tahun)';
   }
 }
 
-class Kucing extends Hewan{
+void main() {
+  var mobilA = Mobil('Honda', 2020);
+  print(mobilA);
+
+  var mobilB = Mobil.baru();
+  print(mobilB);
+
+  var mobilC = Mobil.dariJson({"merk":"Suzuki","tahun":2021});
+  print(mobilC);
 }
+</pre>
 </div>
 
+<iframe src="https://dartpad.dev/embed-dart.html?id=8db7157752dedc77228f2d0ef5c235c9&run=true"></iframe>
+
 </div>
 
 
+<div class="section">
 
-<div class="card">
-
-<h2>Polymorphism</h2>
+<h2>Constant Constructor (Class Warna)</h2>
 
 <p>
-Polymorphism adalah kemampuan objek untuk memiliki banyak bentuk 
-sehingga satu method dapat digunakan dengan cara yang berbeda.
+Constant constructor digunakan untuk membuat objek yang bersifat konstan.
 </p>
 
-<div class="codebox">
-class Hewan{
-  void suara(){
-    print("Suara hewan");
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+class Warna {
+  final int r, g, b;
+
+  const Warna(this.r, this.g, this.b);
+
+  String toString() {
+    return 'Warna(r: $r, g: $g, b: $b)';
   }
 }
 
-class Kucing extends Hewan{
-  void suara(){
-    print("Meong");
+void main() {
+  const merah = Warna(255,0,0);
+  const merahLagi = Warna(255,0,0);
+
+  print(merah);
+  print(merahLagi);
+}
+</pre>
+</div>
+
+<iframe src="https://dartpad.dev/embed-dart.html?id=1dfaf0a9e26a4288fa6a9ff2a52725e4&run=true"></iframe>
+
+</div>
+
+
+<div class="section">
+
+<h2>Initializer List (Class Titik)</h2>
+
+<p>
+Initializer list digunakan untuk menginisialisasi nilai variabel sebelum constructor dijalankan.
+</p>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+class Titik {
+  final double x, y;
+
+  Titik(double x, double y)
+      : x = x.abs(),
+        y = y.abs();
+}
+
+void main() {
+  var titik = Titik(-5,10);
+  print("x: ${titik.x}, y: ${titik.y}");
+}
+</pre>
+</div>
+
+<iframe src="https://dartpad.dev/embed-dart.html?id=573cfbb85e054f59165865657799ae67&run=true"></iframe>
+
+</div>
+
+
+<div class="section">
+
+<h2>Class Person (Private Variable)</h2>
+
+<p>
+Variabel dengan tanda underscore (_) bersifat private sehingga tidak bisa diakses langsung dari luar class.
+</p>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+class Person {
+  String _name;
+  int age;
+
+  Person(this._name, this.age);
+
+  void tampilData() {
+    print("Nama: $_name");
+    print("Umur: $age");
   }
 }
-</div>
 
-</div>
-
-
-
-<div class="card">
-
-<h2>Preview Program</h2>
-
-<button onclick="runProgram()">Run Program</button>
-
-<div class="preview" id="hasil">
-Hasil program akan muncul disini
-</div>
-
-</div>
-
-</div>
-
-
-<footer>
-Website Tugas OOP
-</footer>
-
-
-<script>
-
-function runProgram(){
-document.getElementById("hasil").innerHTML =
-"Program berhasil dijalankan!";
+void main() {
+  Person person = Person("Putri",19);
+  person.tampilData();
 }
+</pre>
+</div>
 
-</script>
+<iframe src="https://dartpad.dev/embed-dart.html?id=300ae5bc42826d628dfa23f8757739e2&run=true"></iframe>
+
+</div>
+
+
+<div class="section">
+
+<h2>Kesimpulan</h2>
+
+<p>
+Constructor digunakan untuk menginisialisasi objek saat class dibuat. 
+Dalam bahasa Dart terdapat berbagai jenis constructor seperti default constructor, named constructor, dan constant constructor.
+
+Konsep enkapsulasi digunakan untuk melindungi data dalam class dengan menggunakan private variable, getter, dan setter sehingga program menjadi lebih aman dan terstruktur.
+</p>
+
+</div>
+
 
 </body>
 </html>
