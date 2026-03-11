@@ -3,213 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Laporan OOP Dart</title>
+<title>Laporan OOP</title>
 
 <style>
 
 body{
-  margin:0;
-  padding:40px 80px;
-  background:#0f0f14;
-  font-family:Arial, sans-serif;
-  color:white;
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#ffd6ec,#ffc2e2,#ffb3da);
 }
 
-h1{
-  text-align:center;
-  color:#ff4da6;
+/* HEADER */
+
+header{
+    background:#ff7eb3;
+    color:white;
+    text-align:center;
+    padding:25px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.2);
 }
 
-.identitas{
-  text-align:center;
-  margin-bottom:40px;
-  color:#ff9ac6;
-  line-height:1.7;
+header h1{
+    margin:0;
 }
 
-.section{
-  border:2px solid #ff4da6;
-  border-radius:12px;
-  padding:25px;
-  margin-bottom:40px;
-  background:#1a1a22;
-  width:100%;
-  box-sizing:border-box;
+header p{
+    margin:5px;
 }
 
-.preview-box{
-  background:#0b0b0f;
-  padding:20px;
-  border-radius:10px;
-  border:1px solid #333;
-  margin-top:15px;
-  width:100%;
-  box-sizing:border-box;
+
+/* CONTAINER */
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+    margin-top:30px;
 }
 
-.preview-box pre{
-  margin:0;
-  padding:18px;
-  background:#050509;
-  border-radius:8px;
-  font-family:monospace;
-  font-size:15px;
-  line-height:1.7;
-  color:#00ff9d;
-  width:100%;
-  box-sizing:border-box;
-  white-space:pre-wrap;
-  word-break:break-word;
+/* CARD */
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
 }
 
-iframe{
-  width:100%;
-  height:500px;
-  border:none;
-  margin-top:20px;
-  border-radius:8px;
+.card h2{
+    color:#ff4fa3;
+}
+
+/* CODE BOX */
+
+.codebox{
+    background:#1e1e1e;
+    color:#00ff9c;
+    padding:15px;
+    border-radius:8px;
+    overflow-x:auto;
+    margin-top:10px;
+}
+
+/* BUTTON */
+
+button{
+    background:#ff4fa3;
+    border:none;
+    padding:10px 20px;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#ff2f93;
+}
+
+/* PREVIEW BOX */
+
+.preview{
+    background:#fff0f7;
+    border:2px solid #ff7eb3;
+    padding:20px;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:20px;
+    margin-top:30px;
+    color:#444;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<h1>Konstruktor dan Enkapsulasi dalam Pemrograman Dart</h1>
+<header>
+<h1>Laporan Object Oriented Programming</h1>
+<p>Nama : Putri Ananda</p>
+<p>NIM : 2442933939</p>
+<p>Kelas : SI2A</p>
+</header>
 
-<div class="identitas">
-Nama: Putri Ananda Amelia <br>
-NIM: 251410029 <br>
-Kelas: SI2A
+<div class="container">
+
+
+<div class="card">
+<h2>Pengertian OOP</h2>
+
+<p>
+Object Oriented Programming (OOP) adalah metode pemrograman yang 
+menggunakan konsep objek. Dalam OOP program dibangun dari kumpulan objek 
+yang memiliki data dan fungsi. Konsep ini membantu membuat program lebih 
+terstruktur dan mudah dikembangkan.
+</p>
+
 </div>
 
-<div class="section">
 
-<h2>Named Constructor</h2>
+<div class="card">
 
-<div class="preview-box">
+<h2>Encapsulation</h2>
 
-<pre>
-class Mobil {
+<p>
+Encapsulation adalah proses membungkus data dan method dalam satu class 
+agar data tersebut terlindungi dan tidak dapat diakses secara langsung 
+dari luar class.
+</p>
 
-  String? merk;
-  int? tahun;
+<div class="codebox">
+class Mahasiswa {
+  String nama;
+  int umur;
 
-  Mobil(this.merk, this.tahun);
-
-  Mobil.baru(){
-    merk = "Toyota";
-    tahun = 2023;
+  void tampilkan(){
+    print(nama);
   }
-
 }
-
-void main(){
-
-  var mobilA = Mobil("Honda",2020);
-  print(mobilA.merk);
-
-  var mobilB = Mobil.baru();
-  print(mobilB.merk);
-
-}
-</pre>
-
 </div>
-
-<iframe src="https://dartpad.dev/embed-dart.html?id=8db7157752dedc77228f2d0ef5c235c9&run=true"></iframe>
 
 </div>
 
 
-<div class="section">
 
-<h2>Getter</h2>
+<div class="card">
 
-<div class="preview-box">
+<h2>Inheritance</h2>
 
-<pre>
-class Person{
+<p>
+Inheritance adalah konsep pewarisan dimana sebuah class dapat mewarisi 
+atribut dan method dari class lain sehingga kode dapat digunakan kembali.
+</p>
 
-  String _name;
-  int age;
-
-  Person(this._name,this.age);
-
-  String get getName{
-    return _name;
+<div class="codebox">
+class Hewan{
+  void makan(){
+    print("Hewan sedang makan");
   }
-
 }
 
-void main(){
-
-  var p = Person("Putri",19);
-
-  print(p.getName);
-
+class Kucing extends Hewan{
 }
-</pre>
-
 </div>
-
-<iframe src="https://dartpad.dev/embed-dart.html?id=dd52cb3ac235fd4784d78e318eb72213&run=true"></iframe>
 
 </div>
 
 
-<div class="section">
 
-<h2>Tugas Bonus - Rekening Bank</h2>
+<div class="card">
 
-<div class="preview-box">
+<h2>Polymorphism</h2>
 
-<pre>
-class RekeningBank{
+<p>
+Polymorphism adalah kemampuan objek untuk memiliki banyak bentuk 
+sehingga satu method dapat digunakan dengan cara yang berbeda.
+</p>
 
-  String _nomorRekening;
-  double _saldo;
-
-  RekeningBank(this._nomorRekening,this._saldo);
-
-  void deposit(double jumlah){
-    if(jumlah>0){
-      _saldo += jumlah;
-    }
+<div class="codebox">
+class Hewan{
+  void suara(){
+    print("Suara hewan");
   }
-
-  void tarik(double jumlah){
-    if(jumlah <= _saldo){
-      _saldo -= jumlah;
-    }
-  }
-
-  void cekSaldo(){
-    print(_nomorRekening);
-    print(_saldo);
-  }
-
 }
 
-void main(){
-
-  var rekening = RekeningBank("456789",500000);
-
-  rekening.deposit(200000);
-  rekening.tarik(100000);
-
-  rekening.cekSaldo();
-
+class Kucing extends Hewan{
+  void suara(){
+    print("Meong");
+  }
 }
-</pre>
+</div>
 
 </div>
 
-<iframe src="https://dartpad.dev/embed-dart.html?id=8784a60a54a9528480ae4a77347fa97d&run=true"></iframe>
+
+
+<div class="card">
+
+<h2>Preview Program</h2>
+
+<button onclick="runProgram()">Run Program</button>
+
+<div class="preview" id="hasil">
+Hasil program akan muncul disini
+</div>
 
 </div>
+
+</div>
+
+
+<footer>
+Website Tugas OOP
+</footer>
+
+
+<script>
+
+function runProgram(){
+document.getElementById("hasil").innerHTML =
+"Program berhasil dijalankan!";
+}
+
+</script>
 
 </body>
 </html>
