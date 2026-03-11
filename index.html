@@ -9,10 +9,13 @@
 
 body{
   margin:0;
-  padding:40px;
+  padding:40px 20px;
   background:#0f0f14;
   font-family:Arial, sans-serif;
   color:white;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
 h1{
@@ -29,41 +32,50 @@ h1{
 
 .section{
   border:2px solid #ff4da6;
-  padding:25px;
-  margin-bottom:40px;
-  border-radius:12px;
+  padding:35px;
+  margin:40px auto;
+  border-radius:16px;
   background:#1a1a22;
+  max-width:1200px;
+  width:95%;
 }
 
 h2{
   color:#ff4da6;
 }
 
+.code-title{
+  font-size:13px;
+  letter-spacing:2px;
+  color:#aaaaaa;
+  margin-bottom:10px;
+}
+
 .preview-box{
   background:#000;
-  padding:25px;
+  padding:30px;
   border-radius:12px;
-  margin-top:20px;
+  margin-top:15px;
   color:#00ff88;
   font-family:monospace;
   font-size:14px;
   line-height:1.6;
   width:100%;
   box-sizing:border-box;
-  overflow-x:auto;
 }
 
 .preview-box pre{
   margin:0;
-  white-space:pre;
+  white-space:pre-wrap;
+  word-break:break-word;
 }
 
 iframe{
   width:100%;
   height:600px;
   border:none;
-  margin-top:20px;
-  border-radius:10px;
+  margin-top:25px;
+  border-radius:12px;
 }
 
 </style>
@@ -79,28 +91,35 @@ NIM: 251410029 <br>
 Kelas: SI2A
 </div>
 
-
 <div class="section">
+
 <h2>Penjelasan Konstruktor dan Enkapsulasi</h2>
 
 <p>
-Dalam pemrograman berorientasi objek (OOP), terdapat beberapa konsep penting untuk mengatur struktur program agar lebih rapi dan mudah dipahami. 
+Dalam pemrograman berorientasi objek (OOP), terdapat beberapa konsep penting
+untuk mengatur struktur program agar lebih rapi dan mudah dipahami.
 Dua konsep yang sering digunakan adalah konstruktor dan enkapsulasi.
+</p>
 
-Konstruktor merupakan method khusus dalam class yang digunakan untuk membuat atau menginisialisasi objek. 
-Sedangkan enkapsulasi adalah teknik untuk melindungi data dalam class agar tidak dapat diakses langsung dari luar.
+<p>
+Konstruktor merupakan method khusus dalam class yang digunakan
+untuk membuat atau menginisialisasi objek. Sedangkan enkapsulasi
+adalah teknik untuk melindungi data dalam class agar tidak dapat
+diakses langsung dari luar.
 </p>
 
 </div>
-
 
 <div class="section">
 
 <h2>Named Constructor (Class Mobil)</h2>
 
 <p>
-Named constructor memungkinkan sebuah class memiliki lebih dari satu constructor dengan nama berbeda.
+Named constructor memungkinkan sebuah class memiliki lebih dari satu
+constructor dengan nama berbeda.
 </p>
+
+<div class="code-title">DART SOURCE CODE</div>
 
 <div class="preview-box">
 <pre>
@@ -148,14 +167,16 @@ void main() {
 
 </div>
 
-
 <div class="section">
 
 <h2>Constant Constructor (Class Warna)</h2>
 
 <p>
-Constant constructor digunakan untuk membuat objek yang bersifat konstan.
+Constant constructor digunakan untuk membuat objek yang bersifat konstan
+atau tidak berubah.
 </p>
+
+<div class="code-title">DART SOURCE CODE</div>
 
 <div class="preview-box">
 <pre>
@@ -187,14 +208,16 @@ void main() {
 
 </div>
 
-
 <div class="section">
 
 <h2>Initializer List (Class Titik)</h2>
 
 <p>
-Initializer list digunakan untuk menginisialisasi nilai variabel sebelum constructor dijalankan.
+Initializer list digunakan untuk menginisialisasi nilai variabel
+sebelum constructor dijalankan.
 </p>
+
+<div class="code-title">DART SOURCE CODE</div>
 
 <div class="preview-box">
 <pre>
@@ -221,58 +244,23 @@ void main() {
 
 </div>
 
-
-<div class="section">
-
-<h2>Class Person (Private Variable)</h2>
-
-<p>
-Variabel dengan tanda underscore (_) bersifat private sehingga tidak bisa diakses langsung dari luar class.
-</p>
-
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-
-class Person {
-  String _name;
-  int age;
-
-  Person(this._name, this.age);
-
-  void tampilData() {
-    print("Nama: $_name");
-    print("Umur: $age");
-  }
-}
-
-void main() {
-  Person person = Person("Putri",19);
-  person.tampilData();
-}
-</pre>
-</div>
-
-<iframe src="https://dartpad.dev/embed-dart.html?id=300ae5bc42826d628dfa23f8757739e2&run=true"></iframe>
-
-</div>
-
-
 <div class="section">
 
 <h2>Kesimpulan</h2>
 
 <p>
-Constructor digunakan untuk menginisialisasi objek saat class dibuat. 
-Dalam bahasa Dart terdapat berbagai jenis constructor seperti default constructor, named constructor, dan constant constructor.
+Constructor digunakan untuk menginisialisasi objek saat sebuah class dibuat.
+Dalam bahasa Dart terdapat berbagai jenis constructor seperti default constructor,
+named constructor, dan constant constructor.
+</p>
 
-Konsep enkapsulasi digunakan untuk melindungi data dalam class dengan menggunakan private variable, getter, dan setter sehingga program menjadi lebih aman dan terstruktur.
+<p>
+Konsep enkapsulasi digunakan untuk melindungi data dalam class dengan menggunakan
+private variable, getter, dan setter sehingga program menjadi lebih aman,
+terstruktur, dan mudah dikelola.
 </p>
 
 </div>
-
 
 </body>
 </html>
