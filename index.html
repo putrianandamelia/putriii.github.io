@@ -3,15 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Konstruktor dan Enkapsulasi dalam Pemrograman Dart</title>
+
+<title>Laporan OOP Dart</title>
 
 <style>
 
 body{
   margin:0;
-  padding:30px;
-  max-width:1200px;
-  margin:auto;
+  padding:40px 80px;
   background:#0f0f14;
   font-family:Arial, sans-serif;
   color:white;
@@ -24,35 +23,44 @@ h1{
 
 .identitas{
   text-align:center;
-  color:#ff99cc;
-  margin-bottom:30px;
-  line-height:1.8;
+  margin-bottom:40px;
+  color:#ff9ac6;
+  line-height:1.7;
 }
 
 .section{
   border:2px solid #ff4da6;
+  border-radius:12px;
   padding:25px;
   margin-bottom:40px;
-  border-radius:12px;
   background:#1a1a22;
+  width:100%;
+  box-sizing:border-box;
 }
 
 .preview-box{
   background:#0b0b0f;
-  padding:22px;
+  padding:20px;
   border-radius:10px;
-  margin-top:15px;
   border:1px solid #333;
+  margin-top:15px;
   width:100%;
+  box-sizing:border-box;
 }
 
 .preview-box pre{
   margin:0;
+  padding:18px;
+  background:#050509;
+  border-radius:8px;
   font-family:monospace;
   font-size:15px;
-  line-height:1.8;
-  white-space:pre-wrap;
+  line-height:1.7;
   color:#00ff9d;
+  width:100%;
+  box-sizing:border-box;
+  white-space:pre-wrap;
+  word-break:break-word;
 }
 
 iframe{
@@ -64,6 +72,7 @@ iframe{
 }
 
 </style>
+
 </head>
 
 <body>
@@ -76,54 +85,38 @@ NIM: 251410029 <br>
 Kelas: SI2A
 </div>
 
-
 <div class="section">
-<h2>Penjelasan Konstruktor dan Enkapsulasi</h2>
-<p>
-Dalam pemrograman berorientasi objek (OOP), terdapat beberapa konsep penting untuk mengatur struktur program agar lebih rapi dan mudah dipahami. Dua konsep yang sering digunakan adalah konstruktor dan enkapsulasi. Konstruktor merupakan method khusus dalam class yang digunakan untuk membuat atau menginisialisasi objek. Sedangkan enkapsulasi adalah teknik untuk melindungi data dalam class agar tidak dapat diakses langsung dari luar, biasanya menggunakan private variable, getter, dan setter.
-</p>
-</div>
 
-
-<div class="section">
-<h2>Jenis-jenis Konstruktor Dart</h2>
-<p>
-Default Constructor, Named Constructor, Parameterized Constructor, Constant Constructor.
-</p>
-</div>
-
-
-<div class="section">
-<h2>Named Constructor (Class Mobil)</h2>
+<h2>Named Constructor</h2>
 
 <div class="preview-box">
+
 <pre>
 class Mobil {
+
   String? merk;
   int? tahun;
 
   Mobil(this.merk, this.tahun);
 
-  Mobil.baru() {
-    merk = 'Toyota';
+  Mobil.baru(){
+    merk = "Toyota";
     tahun = 2023;
   }
 
-  String toString() {
-    return 'Mobil(merk: $merk, tahun: $tahun)';
-  }
 }
 
-void main() {
+void main(){
 
-  var mobilA = Mobil('Honda', 2020);
-  print(mobilA);
+  var mobilA = Mobil("Honda",2020);
+  print(mobilA.merk);
 
   var mobilB = Mobil.baru();
-  print(mobilB);
+  print(mobilB.merk);
 
 }
 </pre>
+
 </div>
 
 <iframe src="https://dartpad.dev/embed-dart.html?id=8db7157752dedc77228f2d0ef5c235c9&run=true"></iframe>
@@ -132,74 +125,13 @@ void main() {
 
 
 <div class="section">
-<h2>Constant Constructor (Class Warna)</h2>
 
-<div class="preview-box">
-<pre>
-class Warna {
-
-  final int r,g,b;
-
-  const Warna(this.r,this.g,this.b);
-
-  String toString(){
-    return 'Warna($r,$g,$b)';
-  }
-
-}
-
-void main(){
-
-  const merah = Warna(255,0,0);
-  const merah2 = Warna(255,0,0);
-
-  print(merah);
-  print(merah2);
-
-}
-</pre>
-</div>
-
-<iframe src="https://dartpad.dev/embed-dart.html?id=1dfaf0a9e26a4288fa6a9ff2a52725e4&run=true"></iframe>
-
-</div>
-
-
-<div class="section">
-<h2>Initializer List (Class Titik)</h2>
-
-<div class="preview-box">
-<pre>
-class Titik {
-
-  final double x,y;
-
-  Titik(double x,double y)
-      : x = x.abs(),
-        y = y.abs();
-
-}
-
-void main(){
-
-  var t1 = Titik(3,4);
-  print(t1.x);
-
-}
-</pre>
-</div>
-
-<iframe src="https://dartpad.dev/embed-dart.html?id=573cfbb85e054f59165865657799ae67&run=true"></iframe>
-
-</div>
-
-
-<div class="section">
 <h2>Getter</h2>
 
 <div class="preview-box">
+
 <pre>
-class Person {
+class Person{
 
   String _name;
   int age;
@@ -215,10 +147,12 @@ class Person {
 void main(){
 
   var p = Person("Putri",19);
+
   print(p.getName);
 
 }
 </pre>
+
 </div>
 
 <iframe src="https://dartpad.dev/embed-dart.html?id=dd52cb3ac235fd4784d78e318eb72213&run=true"></iframe>
@@ -227,50 +161,13 @@ void main(){
 
 
 <div class="section">
-<h2>Setter</h2>
 
-<div class="preview-box">
-<pre>
-class Person {
-
-  String _name;
-  int age;
-
-  Person(this._name,this.age);
-
-  set setName(String name){
-    _name = name;
-  }
-
-  String getName(){
-    return _name;
-  }
-
-}
-
-void main(){
-
-  var p = Person("Putri",19);
-
-  p.setName = "Ananda";
-
-  print(p.getName());
-
-}
-</pre>
-</div>
-
-<iframe src="https://dartpad.dev/embed-dart.html?id=be972a6e65331f551e97e5cbbaea966d&run=true"></iframe>
-
-</div>
-
-
-<div class="section">
 <h2>Tugas Bonus - Rekening Bank</h2>
 
 <div class="preview-box">
+
 <pre>
-class RekeningBank {
+class RekeningBank{
 
   String _nomorRekening;
   double _saldo;
@@ -298,20 +195,21 @@ class RekeningBank {
 
 void main(){
 
-  var rekening = RekeningBank("4567890",400000);
+  var rekening = RekeningBank("456789",500000);
 
   rekening.deposit(200000);
   rekening.tarik(100000);
+
   rekening.cekSaldo();
 
 }
 </pre>
+
 </div>
 
 <iframe src="https://dartpad.dev/embed-dart.html?id=8784a60a54a9528480ae4a77347fa97d&run=true"></iframe>
 
 </div>
-
 
 </body>
 </html>
