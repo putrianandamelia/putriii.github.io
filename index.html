@@ -10,7 +10,7 @@
 body{
   margin:0;
   padding:30px;
-  max-width:1100px;
+  max-width:1200px;
   margin:auto;
   background:#0f0f14;
   font-family:Arial, sans-serif;
@@ -39,19 +39,20 @@ h1{
 
 .preview-box{
   background:#0b0b0f;
-  padding:18px;
-  border-radius:8px;
+  padding:22px;
+  border-radius:10px;
   margin-top:15px;
   border:1px solid #333;
-  overflow-x:auto;
+  width:100%;
 }
 
 .preview-box pre{
   margin:0;
   font-family:monospace;
-  font-size:14px;
-  line-height:1.6;
-  white-space:pre;
+  font-size:15px;
+  line-height:1.8;
+  white-space:pre-wrap;
+  color:#00ff9d;
 }
 
 iframe{
@@ -106,11 +107,6 @@ class Mobil {
   Mobil.baru() {
     merk = 'Toyota';
     tahun = 2023;
-  }
-
-  Mobil.dariJson(Map<String, dynamic> json) {
-    merk = json['merk'];
-    tahun = json['tahun'];
   }
 
   String toString() {
@@ -282,26 +278,20 @@ class RekeningBank {
   RekeningBank(this._nomorRekening,this._saldo);
 
   void deposit(double jumlah){
-
     if(jumlah>0){
       _saldo += jumlah;
     }
-
   }
 
   void tarik(double jumlah){
-
     if(jumlah <= _saldo){
       _saldo -= jumlah;
     }
-
   }
 
   void cekSaldo(){
-
     print(_nomorRekening);
     print(_saldo);
-
   }
 
 }
