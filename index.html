@@ -74,6 +74,7 @@ h1{
 
 .popup-box{
   width:95%;
+  height:90vh;
   max-width:1000px;
   background:#1a1a22;
   padding:20px;
@@ -753,7 +754,7 @@ Run di DartPad
 <script>
 function openPopup(id){
   document.getElementById("dartFrame").src =
-  "https://dartpad.dev/embed-dart.html?id=" + id + "&run=true";
+  "https://dartpad.dev/embed-dart.html?id=" + id + "&run=true&split=60";
   document.getElementById("popup").style.display="flex";
 }
 
