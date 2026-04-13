@@ -1,0 +1,908 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiple Inheritance & Class Modifiers</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  padding:40px;
+  background:#0f0f14;
+  font-family:'Poppins', sans-serif;
+  color:white;
+  overflow-x:hidden;
+}
+
+h1{
+  text-align:center;
+  color:#ff4da6;
+  font-family: 'Dancing Script', sans-serif;
+}
+
+.identitas{
+  text-align: center;
+  margin-bottom:30px;
+  color:#ff99cc;
+  line-height:1.8;
+}
+
+.section{
+  border:2px solid #ff4da6;
+  padding:25px;
+  margin-bottom:40px;
+  border-radius:12px;
+  background:#1a1a22;
+}
+
+.preview-box{
+  background:black;
+  padding:20px;
+  border-radius:10px;
+  margin-top:15px;
+  color:#00ff88;
+  font-family:monospace;
+  overflow-x:auto;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.btn-run{
+  background:#ff4da6;
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  margin-top:15px;
+}
+
+.btn-run:hover{
+  background:#ff1a8c;
+}
+
+/* POPUP */
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  z-index:99999;
+  justify-content:center;
+  align-items:center;
+}
+
+.popup-box{
+  width:95%;
+  height:85vh;
+  max-width:1000px;
+  background:#1a1a22;
+  padding:20px;
+  border-radius:10px;
+  position:relative;
+  border:2px solid #ff4da6;
+}
+
+#dartFrame{
+width:100%;
+height:100%;
+border:none;
+}
+  
+.close{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:22px;
+  cursor:pointer;
+  color:#ff4da6;
+}
+
+iframe{
+  width:100%;
+  height:520px;
+  border:none;
+  margin-top:20px;
+}
+
+#popupImg{
+  width:100%;
+  max-height:80vh;
+  object-fit:contain;
+}
+/* KHUSUS POPUP GAMBAR */
+.image-box{
+  width:auto;
+  max-width:90%;
+  max-height:90%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* KHUSUS GAMBAR */
+.image-box img{
+  max-width:100%;
+  max-height:60vh;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  border-radius:8px;
+}
+
+table {
+  margin: 20px auto;        /* jarak atas bawah + tengah */
+  width: 80%;               /* tidak full layar */
+  border-collapse: collapse;
+  font-size: 14px;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th {
+  background-color: #ff4da6; /* pink */
+  color: black;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+tr:hover {
+  background-color: #ffe6f0; /* efek hover biar cantik */
+}
+
+.check {
+  color: green;
+  font-weight: bold;
+}
+
+.cross {
+  color: red;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Multiple Inheritance & Class Modifiers</h1>
+<div class="identitas">
+Nama: Putri Ananda Amelia<br>
+NIM: 251410029<br>
+Kelas: SI2A
+</div>
+
+<div class="section">
+<h2>Multiple Inheritance dengan Mixin</h2>
+<p>
+<ul>
+<li>Multiple inheritance: digunakan agar satu objek mewarisi perilaku/properti dari dua atau lebih class sekaligus.</li>
+
+<li>Dart: pakai mixin untuk menggabungkan fungsionalitas beberapa class tanpa pewarisan rumit.</li>
+
+<li>Bahasa yang mendukung: C++, Python, Scala, Perl (multiple inheritance langsung), Java, C#, Kotlin (single inheritance).</li>
+
+<li>Contoh: Bebek (berenang + terbang), Smartphone (kamera + telepon).</li>
+</ul>
+</p>
+</div>
+
+<div class="section">
+<h2>Studi Kasus: Burung dan Bebek</h2>
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+mixin CanFly {
+  void fly() {
+    print('Can fly!');
+  }
+}
+
+mixin CanSwim {
+  void swim() {
+    print('Can swim!');
+  }
+}
+
+class Bird with CanFly {}
+
+class Duck extends Bird with CanSwim {}
+
+void main() {
+  Bird bird = Bird();
+  bird.fly();
+
+  Duck duck = Duck();
+  duck.fly();
+  duck.swim();
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openPopup('1c41187897c57e2b7c87a017d26c3aef')">
+Run di DartPad
+</button>
+</div>
+
+<div class="section">
+<h2>Studi Kasus: mixin dengan state</h2>
+  <div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+mixin CanFly {
+  bool _isFlying = false;
+
+  bool get isFlying => _isFlying;
+
+  void fly() {
+    if (!_isFlying) {
+      _isFlying = true;
+      print('Started flying!');
+    } else {
+      print('Already flying!');
+    }
+  }
+
+  void land() {
+    if (_isFlying) {
+      _isFlying = false;
+      print('Landed!');
+    } else {
+      print('Already on the ground!');
+    }
+  }
+}
+
+mixin CanSwim {
+  bool _isSwimming = false;
+
+  bool get isSwimming => _isSwimming;
+
+  void swim() {
+    if (!_isSwimming) {
+      _isSwimming = true;
+      print('Started swimming!');
+    } else {
+      print('Already swimming!');
+    }
+  }
+
+  void stopSwim() {
+    if (_isSwimming) {
+      _isSwimming = false;
+      print('Stop swimming!');
+    } else {
+      print('Already stopped swimming!');
+    }
+  }
+}
+
+class Bat with CanFly {}
+
+class Frog with CanSwim {}
+
+class FlyingFish with CanFly, CanSwim {}
+
+class Dolphin with CanSwim {}
+
+void main() {
+  Bat bat = Bat();
+  bat.fly();
+  bat.land();
+
+  print('Is Bat flying? : ${bat.isFlying}');
+
+  print('----------------');
+
+  Frog frog = Frog();
+  frog.swim();
+  frog.stopSwim();
+
+  print('Is Frog swimming? : ${frog.isSwimming}');
+
+  print('----------------');
+
+  FlyingFish fish = FlyingFish();
+  fish.swim();
+  fish.fly();
+  fish.land();
+  fish.stopSwim();
+
+  print('Is FlyingFish swimming? : ${fish.isSwimming}');
+
+  print('----------------');
+
+  Dolphin dolphin = Dolphin();
+  dolphin.swim();
+  dolphin.stopSwim();
+}
+</pre>
+</div>
+  
+<button class="btn-run" onclick="openPopup('043a00f632beeb734d4d48ca151accc0')">
+Run di DartPad
+</button>
+</div>
+
+<div class="section">
+<h2>Sealed Class</h2>
+<p>
+<ul>
+<li>Mendeklarasikan sealed class ApiResponse</li>
+<li>Menentukan turunan: Succes dan Error</li>
+<li>Berfungsi sebagai library (dasar class)</li>
+</ul>
+</p>
+  
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+//libsealed.dart
+sealed class ApiResponse {}
+
+class Success extends ApiResponse {
+  final String message;
+  Success(this.message);
+}
+
+class Error extends ApiResponse {
+  final String errorMessage;
+  Error(this.errorMessage);
+}
+</pre>
+</div>
+
+<p>
+<ul>
+<li>Menggunakan class dari libsealed.dart</li>
+<li>Menampilkan hasil Succes dan Error</li>
+<li>Di gunakan untuk menguji sealed class</li>
+</ul>
+</p>
+
+ <div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'libsealed.dart';
+
+void handleResponse(ApiResponse response) {
+  if (response is Success) {
+    print("Success: ${response.message}");
+  } else if (response is Error) {
+    print("Error: ${response.errorMessage}");
+  }
+}
+
+void main() {
+  handleResponse(Success("Data berhasil"));
+  handleResponse(Error("Terjadi kesalahan"));
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openImagePopup('gambar1.png')">
+Klik Lihat Output
+</button>
+</div>
+
+<div class="section">
+<h2>Base Class</h2>
+<p>
+<ul>
+<li>Mendeklarasikan base class Animal</li>
+<li>Mengatur bahwa hanya boleh extends</li>
+<li>Berfungsi sebagai dasar pewarisan</li>
+</ul>
+</p>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+//libbase.dart
+base class Animal {
+  void speak() {}
+}
+</pre>
+</div>
+
+<ul>
+<li>Merupakan class turunan</li>
+<li>Menggunakan extends Animal</li>
+</ul>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'libbase.dart';
+
+base class Cow extends Animal {
+  @override
+  void speak() {
+    print("Moo!");
+  }
+}
+
+base class Lion extends Animal {
+  @override
+  void speak() {
+    print("Roarr!");
+  }
+}
+
+void main() {
+  Animal cow = Cow();
+  cow.speak();
+
+  Animal lion = Lion();
+  lion.speak();
+}
+</pre>
+</div>
+
+
+<button class="btn-run" onclick="openImagePopup('gambar2.png')">
+Klik Lihat Output
+</button>
+</div>
+
+<div class="section">
+<h2>Final Class</h2>
+<p>
+<ul>
+<li>Mendeklarasikan final class Settings</li>
+<li>Tidak bisa di-extend atau di-implement dari luar library
+    Tapi bisa di-extend/implement di dalam library yang sama </li>
+<li>Berguna untuk class yang ingin "ditutup" untuk modifikasi.</li>
+</ul>
+</p>
+  
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+//libfinal.dart
+final class Settings {
+  final String theme;
+  final int fontSize;
+
+  Settings({required this.theme, required this.fontSize});
+
+  void showSettings() {
+    print("Theme: $theme, Font Size: $fontSize");
+  }
+}
+
+base class CustomSettings extends Settings {
+  CustomSettings(String theme, int fontSize)
+      : super(theme: theme, fontSize: fontSize);
+}
+</pre>
+</div>
+
+<ul>
+<li>Membuat object dari Settings</li>
+<li>Di gunakan untuk menguji final class</li>
+</ul>
+
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'libfinal.dart';
+
+void main() {
+  Settings settings = Settings(theme: "Dark", fontSize: 16);
+  settings.showSettings();
+
+  CustomSettings custom = CustomSettings("Dark", 16);
+  custom.showSettings();
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openImagePopup('gambar3.png')">
+Klik Lihat Output
+</button>
+</div>
+
+<div class="section">
+<h2>Perbandingan Class Modifiers</h2>
+
+<table>
+  <tr>
+    <th>Modifier</th>
+    <th>Extend di luar</th>
+    <th>Implement di luar</th>
+    <th>Extend di dalam</th>
+    <th>Implement di dalam</th>
+  </tr>
+
+  <tr>
+    <td>sealed</td>
+    <td class="cross">✖</td>
+    <td class="cross">✖</td>
+    <td class="check">✔</td>
+    <td class="cross">✖</td>
+  </tr>
+
+  <tr>
+    <td>base</td>
+    <td class="check">✔</td>
+    <td class="cross">✖</td>
+    <td class="check">✔</td>
+    <td class="check">✔</td>
+  </tr>
+
+  <tr>
+    <td>final</td>
+    <td class="cross">✖</td>
+    <td class="cross">✖</td>
+    <td class="check">✔</td>
+    <td class="check">✔</td>
+  </tr>
+
+  <tr>
+    <td>(default)</td>
+    <td class="check">✔</td>
+    <td class="check">✔</td>
+    <td class="check">✔</td>
+    <td class="check">✔</td>
+  </tr>
+
+</table>
+</div>
+
+<div class="section">
+<h2>Praktik 1 : Sealed Class dengan Pattern Matching</h2>
+  
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+  
+sealed class LoginStatus {
+  const LoginStatus();
+}
+
+class LoggingIn extends LoginStatus {
+  const LoggingIn();
+}
+
+class Success extends LoginStatus {
+  final String username;
+  const Success(this.username);
+}
+
+class Error extends LoginStatus {
+  final String message;
+  const Error(this.message);
+}
+
+void handleStatus(LoginStatus status) {
+  switch (status) {
+    case LoggingIn():
+      print('Logging in...');
+    case Success(:final username):
+      print('Welcome, $username');
+    case Error(:final message):
+      print('Login failed: $message');
+  }
+}
+
+void main() {
+  final states = <LoginStatus>[
+    LoggingIn(),
+    Success('Putri'),
+    Error('Wrong password'),
+  ];
+
+  for (var state in states) {
+    handleStatus(state);
+  }
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openPopup('a1aa6888ead4512767e7202cb9fe1315')">
+Run di DartPad
+</button>
+</div>
+
+<div class="section">
+<h2>Studi Kasus : Sistem State Management</h2>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+sealed class DataState {}
+
+class LoadingData extends DataState {}
+
+class DataLoaded extends DataState {
+  final List<String> data;
+  DataLoaded(this.data);
+}
+
+class DataError extends DataState {
+  final String message;
+  DataError(this.message);
+}
+
+void updateUI(DataState state) {
+  switch (state) {
+    case LoadingData():
+      showLoading();
+    case DataLoaded(:final data):
+      showData(data);
+    case DataError(:final message):
+      showError(message);
+  }
+}
+
+void showLoading() {
+  print('⏳ Loading data...');
+}
+
+void showData(List<String> data) {
+  print('✅ Data loaded:');
+  for (int i = 0; i < data.length; i++) {
+    print('   ${i + 1}. ${data[i]}');
+  }
+}
+
+void showError(String message) {
+  print('❌ Error: $message');
+}
+
+void main() {
+  final states = <DataState>[
+    LoadingData(),
+    DataLoaded(['Data 1', 'Data 2']),
+    DataError('Gagal memuat data'),
+  ];
+
+  for (var state in states) {
+    updateUI(state);
+  }
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openPopup('c8d5d793325df3199f29a988771f0800')">
+Run di DartPad
+</button>
+</div>
+
+<div class="section">
+<h2>Kesimpulan</h2>
+<p>
+Sealed class cocok untuk membuat tipe data dengan hierarki terbatas agar pattern matching aman.
+Base class digunakan untuk membuat class dasar yang bisa diturunkan di framework atau aplikasi.
+Final class cocok untuk utility class yang tidak boleh diturunkan atau diimplementasi dari luar.
+</p>
+</div>
+
+
+<div class="section">
+<h2>Bonus: Base Class Repository (CRUD)</h2>
+<p>
+<ul>
+<li>Berisi method CRUD (create, read, update, delete)</li>
+<li>Menggunakan base</li>
+</ul>
+</p>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+// repository.dart
+base class Repository {
+  void create(String data) {
+    print("Create data: $data");
+  }
+
+  void read() {
+    print("Read data");
+  }
+
+  void update(String data) {
+    print("Update data: $data");
+  }
+
+  void delete(String data) {
+    print("Delete data: $data");
+  }
+}
+</pre>
+</div>
+
+<p>
+<ul>
+<li>UserRepository turunan dari Repository (extends)</li>
+<li>Override method create</li>
+<li>main() untuk menjalankan program</li>
+</ul>
+</p>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'repository.dart';
+
+base class UserRepository extends Repository {
+  @override
+  void create(String data) {
+    print("User created: $data");
+  }
+}
+
+void main() {
+  var repo = UserRepository();
+  repo.create("Putri Ananda");
+  repo.read();
+  repo.update("Data Baru");
+  repo.delete("Data Lama");
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openImagePopup('gambar4.png')">
+Klik Lihat Output
+</button>
+</div>
+
+
+<div class="section">
+<h2>Bonus: Final Class MathUtils (Static Methods)</h2>
+
+<p>
+<ul>
+<li>Menggunakan final</li>
+<li>Tidak bisa diwariskan</li>
+<li>Berisi operasi matematika (tambah,kurang,kali,bagi)</li>
+</ul>
+</p>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+
+// math_utils.dart
+final class MathUtils {
+  static int tambah(int a, int b) {
+    return a + b;
+  }
+
+  static int kurang(int a, int b) {
+    return a - b;
+  }
+
+  static int kali(int a, int b) {
+    return a * b;
+  }
+
+  static double bagi(int a, int b) {
+    return a / b;
+  }
+}
+</pre>
+</div>
+
+<p>
+<ul>
+<li>Menjalankan method dari MathUtils</li>
+<li>Tidak perlu membuat objek</li>
+</ul>
+</p>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'math_utils.dart';
+
+void main() {
+  print(MathUtils.tambah(10, 5));
+  print(MathUtils.kurang(10, 5));
+  print(MathUtils.kali(10, 5));
+  print(MathUtils.bagi(10, 5));
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openImagePopup('gambar5.png')">
+Klik Lihat Output
+</button>
+</div>
+
+
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <span class="close" onclick="closePopup()">❌</span>
+    <iframe id="dartFrame"></iframe>
+  </div>
+</div>
+
+<div class="popup" id="imagePopup">
+  <div class="popup-box image-box">
+    <span class="close" onclick="closeImagePopup()">❌</span>
+    <img id="popupImg">
+  </div>
+</div>
+
+<script>
+function openPopup(id){
+  document.getElementById("dartFrame").src =
+  "https://dartpad.dev/embed-dart.html?id=" + id + "&run=true&split=60";
+  document.getElementById("popup").style.display="flex";
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display="none";
+  document.getElementById("dartFrame").src="";
+}
+
+function openImagePopup(src){
+  document.getElementById("imagePopup").style.display="flex";
+  document.getElementById("popupImg").src=src;
+}
+
+function closeImagePopup(){
+  document.getElementById("imagePopup").style.display="none";
+  document.getElementById("popupImg").src="";
+}
+</script>
+
+</body>
+</html>
