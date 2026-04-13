@@ -138,41 +138,6 @@ iframe{
   border-radius:8px;
 }
 
-table {
-  margin: 20px auto;        /* jarak atas bawah + tengah */
-  width: 80%;               /* tidak full layar */
-  border-collapse: collapse;
-  font-size: 14px;
-  background-color: black;
-  color: white;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-th {
-  background-color: #ff4da6; /* pink */
-  color: black;
-}
-
-td, th {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-}
-
-tr:hover {
-  background-color: #ffe6f0; /* efek hover biar cantik */
-}
-
-.check {
-  color: green;
-  font-weight: bold;
-}
-
-.cross {
-  color: red;
-  font-weight: bold;
-}
 </style>
 </head>
 
@@ -544,48 +509,15 @@ Klik Lihat Output
 <div class="section">
 <h2>Perbandingan Class Modifiers</h2>
 
-<table>
-  <tr>
-    <th>Modifier</th>
-    <th>Extend di luar</th>
-    <th>Implement di luar</th>
-    <th>Extend di dalam</th>
-    <th>Implement di dalam</th>
-  </tr>
-
-  <tr>
-    <td>sealed</td>
-    <td class="cross">✖</td>
-    <td class="cross">✖</td>
-    <td class="check">✔</td>
-    <td class="cross">✖</td>
-  </tr>
-
-  <tr>
-    <td>base</td>
-    <td class="check">✔</td>
-    <td class="cross">✖</td>
-    <td class="check">✔</td>
-    <td class="check">✔</td>
-  </tr>
-
-  <tr>
-    <td>final</td>
-    <td class="cross">✖</td>
-    <td class="cross">✖</td>
-    <td class="check">✔</td>
-    <td class="check">✔</td>
-  </tr>
-
-  <tr>
-    <td>(default)</td>
-    <td class="check">✔</td>
-    <td class="check">✔</td>
-    <td class="check">✔</td>
-    <td class="check">✔</td>
-  </tr>
-
-</table>
+<ul>
+  <li><b>sealed</b>: Tidak bisa di-extend dan di-implement dari luar file, hanya bisa di dalam file yang sama.</li>
+  
+  <li><b>base</b>: Bisa di-extend di luar, tetapi tidak bisa di-implement di luar. Di dalam file masih bisa keduanya.</li>
+  
+  <li><b>final</b>: Tidak bisa di-extend di luar, tetapi masih bisa digunakan di dalam file.</li>
+  
+  <li><b>(default)</b>: Tidak memiliki batasan, bisa di-extend dan di-implement di mana saja.</li>
+</ul>
 </div>
 
 <div class="section">
