@@ -1,28 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Konstruktor dan Enkapsulasi dalam Pemrograman Dart</title>
-
+<title>Multiple Inheritance & Class Modifiers</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
+
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   padding:40px;
   background:#0f0f14;
-  font-family:Arial, sans-serif;
+  font-family:'Poppins', sans-serif;
   color:white;
+  overflow-x:hidden;
 }
 
 h1{
   text-align:center;
   color:#ff4da6;
+  font-family: 'Dancing Script', sans-serif;
 }
 
-  .identitas{
-  text-align:center;
-  color:#ff99cc;
+.identitas{
+  text-align: center;
   margin-bottom:30px;
+  color:#ff99cc;
   line-height:1.8;
 }
 
@@ -104,463 +112,394 @@ iframe{
   border:none;
   margin-top:20px;
 }
+
+#popupImg{
+  width:100%;
+  max-height:80vh;
+  object-fit:contain;
+}
+/* KHUSUS POPUP GAMBAR */
+.image-box{
+  width:auto;
+  max-width:90%;
+  max-height:90%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* KHUSUS GAMBAR */
+.image-box img{
+  max-width:100%;
+  max-height:60vh;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  border-radius:8px;
+}
+
 </style>
 </head>
 
 <body>
 
-<h1>Konstruktor dan Enkapsulasi dalam Pemrograman Dart</h1>
-
+<h1>Multiple Inheritance & Class Modifiers</h1>
 <div class="identitas">
-Nama: Putri Ananda Amelia <br>
-NIM: 251410029 <br>
+Nama: Putri Ananda Amelia<br>
+NIM: 251410029<br>
 Kelas: SI2A
 </div>
 
 <div class="section">
-<h2>Penjelasan Konstruktor dan Enkapsulasi</h2>
+<h2>Multiple Inheritance dengan Mixin</h2>
 <p>
-Dalam pemrograman berorientasi objek (OOP), terdapat beberapa konsep penting untuk mengatur struktur program agar lebih rapi dan mudah dipahami. Dua konsep yang sering digunakan adalah konstruktor dan enkapsulasi.
-Konstruktor merupakan method khusus dalam class yang digunakan untuk membuat atau menginisialisasi objek. Sedangkan enkapsulasi adalah teknik untuk melindungi data dalam class agar tidak dapat diakses langsung dari luar, biasanya menggunakan private variable, getter, dan setter.
+<ul>
+<li>Multiple inheritance: digunakan agar satu objek mewarisi perilaku/properti dari dua atau lebih class sekaligus.</li>
+
+<li>Dart: pakai mixin untuk menggabungkan fungsionalitas beberapa class tanpa pewarisan rumit.</li>
+
+<li>Bahasa yang mendukung: C++, Python, Scala, Perl (multiple inheritance langsung), Java, C#, Kotlin (single inheritance).</li>
+
+<li>Contoh: Bebek (berenang + terbang), Smartphone (kamera + telepon).</li>
+</ul>
+</p>
 </div>
 
 <div class="section">
-<h2>Constructors Dasar</h2>
-<p>
-Constructor adalah method khusus dalam sebuah class yang digunakan untuk menginisialisasi nilai atribut saat objek dibuat. Constructor memiliki nama yang sama dengan nama class dan akan otomatis dijalankan ketika objek dibuat. Dengan constructor, nilai atribut dapat langsung diberikan saat pembuatan objek.
-Contoh penerapan class Buku dengan constructor dasar pada Dart:
-</p>
-  
+<h2>Studi Kasus: Burung dan Bebek</h2>
+<p>Mixin digunakan untuk menggabungkan beberapa kemampuan (tanpa inheritance yang rumit).</p>
 <div class="preview-box">
 <pre>
 // Nama  : Putri Ananda Amelia
 // NIM   : 251410029
 // Kelas : SI2A
-  
-class Buku {
-  String judul;
 
-  // constructor
-  Buku(this.judul);
+mixin CanFly {
+  void fly() {
+    print('Can fly!');
+  }
 }
 
-void main() {
-  var buku1 = Buku("Pemrograman Berorientasi Objek");
+mixin CanSwim {
+  void swim() {
+    print('Can swim!');
+  }
+}
 
-  print(buku1.judul);
+class Bird with CanFly {}
+
+class Duck extends Bird with CanSwim {}
+
+void main() {
+  Bird bird = Bird();
+  bird.fly();
+
+  Duck duck = Duck();
+  duck.fly();
+  duck.swim();
 }
 </pre>
 </div>
 
-<button class="btn-run" onclick="openPopup('5b262daf776f0c852b322d3673500048')">
+<button class="btn-run" onclick="openPopup('1c41187897c57e2b7c87a017d26c3aef')">
 Run di DartPad
 </button>
 </div>
 
 <div class="section">
-<h2>Jenis-jenis Konstruktor Dart</h2>
-<p>
-Default Constructor, Named Constructor, Parameterized Constructor, Constant Constructor.
-</p>
-</div>
-
-<div class="section">
-<h2>Named Constructor (Class Mobil)</h2>
-<p>
-Constructor digunakan untuk menginisialisasi objek ketika class dipanggil. Pada Dart juga terdapat named constructor yang memungkinkan sebuah class memiliki lebih dari satu constructor dengan nama berbeda.
-</p>
-  
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-  
-import 'dart:convert';
-
-class Mobil {
-  String? merk;
-  int? tahun;
-
-  Mobil(this.merk, this.tahun);
-
-  Mobil.baru() {
-    merk = 'Hyundai';
-    tahun = 2024;
-  }
-
-  Mobil.dariJson(Map<String, dynamic> json) {
-    merk = json['merk'];
-    tahun = json['tahun'];
-  }
-
-  String toString() {
-    return 'Mobil(merk: $merk, tahun: $tahun)';
-  }
-}
-
-void main() {
-  print('--- Demonstrasi Class Mobil ---');
-
-  var mobilA = Mobil('Toyota', 2021);
-  print('Mobil A: $mobilA');
-
-  var mobilB = Mobil.baru();
-  print('Mobil B: $mobilB');
-
-  String jsonString = '{"merk": "Suzuki", "tahun": 2021}';
-  Map<String, dynamic> jsonData = jsonDecode(jsonString);
-
-  var mobilC = Mobil.dariJson(jsonData);
-  print('Mobil C: $mobilC');
-
-  Map<String, dynamic> anotherJsonData = {
-    'merk': 'Mitsubishi',
-    'tahun': 2023
-  };
-
-  var mobilD = Mobil.dariJson(anotherJsonData);
-  print('Mobil D: $mobilD');
-
-  print('--- Akhir Demonstrasi ---');
-}
-</pre>
-</div>
-  
-<button class="btn-run" onclick="openPopup('8db7157752dedc77228f2d0ef5c235c9')">
-Run di DartPad
-</button>
-</div>
-
-<div class="section">
-<h2>Constant Constructor ( Class Warna )</h2>
-<p>
-Constant constructor digunakan untuk membuat objek yang bersifat konstan atau tidak berubah. Constructor ini biasanya digunakan pada class yang semua atributnya bertipe final.
-</p>
-  
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-  
-class Warna {
-  final int r, g, b;
-
-  const Warna(this.r, this.g, this.b);
-
-  String toString() {
-    return 'Warna(r: $r, g: $g, b: $b)';
-  }
-}
-
-void main() {
-  const merah = Warna(255, 0, 0);
-  const merahLagi = Warna(255, 0, 0);
-
-  print(merah);
-  print(merahLagi);
-}
-</pre>
-</div>
-
-<button class="btn-run" onclick="openPopup('1dfaf0a9e26a4288fa6a9ff2a52725e4')">
-Run di DartPad
-</button>
-</div>
-
-<div class="section">
-<h2>Initializer List ( Class Titik )</h2>
-<p>
-Initializer list digunakan untuk menginisialisasi nilai variabel sebelum constructor dijalankan. Biasanya digunakan pada variabel yang bertipe final.
-</p>
-  
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-  
-class Titik {
-  final double x, y;
-
-  Titik(double x, double y)
-      : x = x.abs(),
-        y = y.abs() {
-    print('Titik dibuat di (${this.x}, ${this.y})');
-  }
-}
-
-void main() {
-  print('Membuat objek Titik pertama:');
-  var titik1 = Titik(3.0, 4.0);
-  print('Titik 1: x=${titik1.x}, y=${titik1.y}');
-
-  print('\nMembuat objek kedua dengan nilai negatif:');
-  var titik2 = Titik(-5.0, 10.0);
-  print('Titik 2: x=${titik2.x}, y=${titik2.y}');
-
-  print('\nMembuat objek ketiga dengan nilai negatif di kedua koordinat:');
-  var titik3 = Titik(-1.5, -2.5);
-  print('Titik 3: x=${titik3.x}, y=${titik3.y}');
-}
-</pre>
-</div>
-
-<button class="btn-run" onclick="openPopup('573cfbb85e054f59165865657799ae67')">
-Run di DartPad
-</button>
-</div>
-
-<div class="section">
-<h2>Praktik 1: Multiple Constructor</h2>
-<p>
-Pada praktik ini dibuat class Mahasiswa yang memiliki atribut seperti nama dan umur. Class ini menggunakan multiple constructor, yaitu satu class memiliki lebih dari satu constructor. 
-Constructor yang digunakan adalah constructor default, Mahasiswa.dariMap(), dan Mahasiswa.tanpaNama() untuk membuat objek dengan cara yang berbeda.
-</p>
-  
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-  
-class Mahasiswa {
-  String? nama;
-  int? umur;
-
-  Mahasiswa(this.nama, this.umur);
-
-  Mahasiswa.dariMap(Map<String, dynamic> data) {
-    nama = data['nama'];
-    umur = data['umur'];
-  }
-
-  Mahasiswa.tanpaNama() {
-    nama = "Tidak diketahui";
-    umur = 18;
-  }
-
-  void tampilkan() {
-    print("Nama: $nama, Umur: $umur");
-  }
-}
-
-void main() {
-
-  var mhs1 = Mahasiswa("Putri", 19);
-
-  var data = {"nama": "Ananda", "umur": 21};
-  var mhs2 = Mahasiswa.dariMap(data);
-
-  var mhs3 = Mahasiswa.tanpaNama();
-
-  mhs1.tampilkan();
-  mhs2.tampilkan();
-  mhs3.tampilkan();
-}
-</pre>
-</div>
-
-<button class="btn-run" onclick="openPopup('7165f8d14a56999d27427a8ba9994287')">
-Run di DartPad
-</button>
-</div>
-
-<div class="section">
-<h2>Public & Private</h2>
-<p>
-Dalam Dart, variabel yang diawali dengan tanda underscore (_) bersifat private sehingga tidak dapat diakses langsung dari luar class.
-</p>
-  
-<div class="preview-box">
+<h2>Studi Kasus: mixin dengan state</h2>
+<p>Mixin juga bisa punya state (variabel) untuk menyimpan kondisi.</p>
+  <div class="preview-box">
 <pre>
 // Nama  : Putri Ananda Amelia
 // NIM   : 251410029
 // Kelas : SI2A
 
-class Person {
-  String _name;
-  int age;
+mixin CanFly {
+  bool _isFlying = false;
 
-  Person(this._name, this.age);
+  bool get isFlying => _isFlying;
 
-  void tampilData() {
-    print("Nama: $_name");
-    print("Umur: $age");
-  }
-}
-
-void main() {
-  Person person = Person("Putri", 19);
-  person.tampilData();
-}
-</pre>
-</div>
-
-<button class="btn-run" onclick="openPopup('300ae5bc42826d628dfa23f8757739e2')">
-Run di DartPad
-</button>
-</div>
-
-<div class="section">
-<h2>Getter</h2>
-<p>
-Getter digunakan untuk mengambil nilai dari variabel private dalam sebuah class sehingga data tetap dapat diakses dengan cara yang lebih terkontrol.
-</p>
-  
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-  
-class Person {
-  String _name;
-  int age;
-
-  Person(this._name, this.age);
-
-  String get getName1 {
-    return _name;
-  }
-
-  String getName() {
-    return _name;
-  }
-}
-
-void main() {
-  Person person = Person("Putri", 19);
-
-  print(person.age);
- 
-  print(person.getName());
-  print(person.getName1);
-}
-</pre>
-</div>
-
-<button class="btn-run" onclick="openPopup('dd52cb3ac235fd4784d78e318eb72213')">
-Run di DartPad
-</button>
-</div>
-
-<div class="section">
-<h2>Setter</h2>
-<p>
-Setter digunakan untuk mengubah nilai variabel private dalam class dengan aturan tertentu sehingga perubahan data dapat dikontrol.
-</p>
-
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-  
-class Person {
-  String _name;
-  int age;
-
-  Person(this._name, this.age);
-
-  set setName1(String name) {
-    _name = name;
-  }
-
-  void setName(String name) {
-    _name = name;
-  }
-
-  String getName() {
-    return _name;
-  }
-}
-
-void main() {
-  Person person = Person("Putri", 19);
-
-  print(person.age);
-
-  person.setName('Ananda');
-  print(person.getName());
-
-  person.setName1 = 'Amelia';
-  print(person.getName());
-}
-</pre>
-</div>
-
-<button class="btn-run" onclick="openPopup('be972a6e65331f551e97e5cbbaea966d')">
-Run di DartPad
-</button>
-</div>
-
-<div class="section">
-<h2>Class Produk ( Getter & Setter Validasi )</h2>
-<p>
-Pada contoh ini, getter dan setter digunakan untuk mengatur akses terhadap data produk serta menambahkan validasi agar nilai yang dimasukkan tetap sesuai aturan.
-</p>
-  
-<div class="preview-box">
-<pre>
-// Nama  : Putri Ananda Amelia
-// NIM   : 251410029
-// Kelas : SI2A
-  
-class Produk {
-  String _nama;
-  double _harga;
-
-  Produk(this._nama, this._harga);
-
-  String get nama => _nama;
-  double get harga => _harga;
-
-  set nama(String value) {
-    if (value.length >= 3) {
-      _nama = value;
+  void fly() {
+    if (!_isFlying) {
+      _isFlying = true;
+      print('Started flying!');
     } else {
-      print('Gagal memperbarui nama: minimal 3 karakter.');
+      print('Already flying!');
     }
   }
 
-  set harga(double value) {
-    if (value > 0) {
-      _harga = value;
+  void land() {
+    if (_isFlying) {
+      _isFlying = false;
+      print('Landed!');
     } else {
-      print('Gagal memperbarui harga: harus lebih dari 0.');
+      print('Already on the ground!');
     }
   }
 }
 
-void main() {
-  var produk1 = Produk('Headset', 4500.0);
+mixin CanSwim {
+  bool _isSwimming = false;
 
-  print('Nama Produk: ${produk1.nama}');
-  print('Harga Produk: Rp ${produk1.harga}');
+  bool get isSwimming => _isSwimming;
 
-  produk1.nama = 'Headset Gaming';
-  produk1.harga = 5200.0;
+  void swim() {
+    if (!_isSwimming) {
+      _isSwimming = true;
+      print('Started swimming!');
+    } else {
+      print('Already swimming!');
+    }
+  }
 
-  print('Nama Produk baru: ${produk1.nama}');
-  print('Harga Produk baru: Rp ${produk1.harga}');
+  void stopSwim() {
+    if (_isSwimming) {
+      _isSwimming = false;
+      print('Stop swimming!');
+    } else {
+      print('Already stopped swimming!');
+    }
+  }
 }
-    
+
+class Bat with CanFly {}
+
+class Frog with CanSwim {}
+
+class FlyingFish with CanFly, CanSwim {}
+
+class Dolphin with CanSwim {}
+
+void main() {
+  Bat bat = Bat();
+  bat.fly();
+  bat.land();
+
+  print('Is Bat flying? : ${bat.isFlying}');
+
+  print('----------------');
+
+  Frog frog = Frog();
+  frog.swim();
+  frog.stopSwim();
+
+  print('Is Frog swimming? : ${frog.isSwimming}');
+
+  print('----------------');
+
+  FlyingFish fish = FlyingFish();
+  fish.swim();
+  fish.fly();
+  fish.land();
+  fish.stopSwim();
+
+  print('Is FlyingFish swimming? : ${fish.isSwimming}');
+
+  print('----------------');
+
+  Dolphin dolphin = Dolphin();
+  dolphin.swim();
+  dolphin.stopSwim();
+}
 </pre>
 </div>
-
-<button class="btn-run" onclick="openPopup('bc3b1c7fa249403720b462ccde2fe3ec')">
+  
+<button class="btn-run" onclick="openPopup('043a00f632beeb734d4d48ca151accc0')">
 Run di DartPad
 </button>
 </div>
 
 <div class="section">
-<h2>Praktik 2: Enkapsulasi Lengkap</h2>
-<p>
-Pada praktik ini dibuat class User yang menggunakan konsep enkapsulasi. Data disimpan dalam field private yaitu _username, _password, dan _email.
-Akses terhadap data tersebut dilakukan menggunakan getter dan setter, dimana setter memiliki validasi seperti username minimal 5 karakter, password minimal 8 karakter, dan email harus mengandung @.
-</p>
+<h2>Sealed Class</h2>
+<p>Sealed class membatasi subclass hanya di file/library yang sama.</p>
+  
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+//libsealed.dart
+sealed class ApiResponse {}
+
+class Success extends ApiResponse {
+  final String message;
+  Success(this.message);
+}
+
+class Error extends ApiResponse {
+  final String errorMessage;
+  Error(this.errorMessage);
+}
+</pre>
+</div>
+
+
+<h2>Penggunaan Sealed Class</h2>
+<p>Digunakan untuk kontrol tipe dan pengecekan kondisi dengan aman.</p>
+
+ <div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'libsealed.dart';
+
+void handleResponse(ApiResponse response) {
+  if (response is Success) {
+    print("Success: ${response.message}");
+  } else if (response is Error) {
+    print("Error: ${response.errorMessage}");
+  }
+}
+
+void main() {
+  handleResponse(Success("Data berhasil"));
+  handleResponse(Error("Terjadi kesalahan"));
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openImagePopup('gambar1.png')">
+Klik Lihat Output
+</button>
+</div>
+
+<div class="section">
+<h2>Base Class</h2>
+<p>Base class hanya boleh diwarisi (extends), tidak bisa di-implements.</p>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+//libbase.dart
+base class Animal {
+  void speak() {}
+}
+</pre>
+</div>
+
+<h2>Pengggunaan Base Class</h2>
+<p>Subclass harus pakai extends, bukan implements.</p>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'libbase.dart';
+
+base class Cow extends Animal {
+  @override
+  void speak() {
+    print("Moo!");
+  }
+}
+
+base class Lion extends Animal {
+  @override
+  void speak() {
+    print("Roarr!");
+  }
+}
+
+void main() {
+  Animal cow = Cow();
+  cow.speak();
+
+  Animal lion = Lion();
+  lion.speak();
+}
+</pre>
+</div>
+
+
+<button class="btn-run" onclick="openImagePopup('gambar2.png')">
+Klik Lihat Output
+</button>
+</div>
+
+<div class="section">
+<h2>Final Class</h2>
+<p>Final class tidak bisa diwarisi dari luar file</p>
+  
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+//libfinal.dart
+final class Settings {
+  final String theme;
+  final int fontSize;
+
+  Settings({required this.theme, required this.fontSize});
+
+  void showSettings() {
+    print("Theme: $theme, Font Size: $fontSize");
+  }
+}
+
+base class CustomSettings extends Settings {
+  CustomSettings(String theme, int fontSize)
+      : super(theme: theme, fontSize: fontSize);
+}
+</pre>
+</div>
+
+
+
+<h2>Penggunaan Final Class</h2>
+<p>Class final hanya bisa dipakai langsung, tidak bisa dibuat turunan di luar.</p>
+
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'libfinal.dart';
+
+void main() {
+  Settings settings = Settings(theme: "Dark", fontSize: 16);
+  settings.showSettings();
+
+  CustomSettings custom = CustomSettings("Dark", 16);
+  custom.showSettings();
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openImagePopup('gambar3.png')">
+Klik Lihat Output
+</button>
+</div>
+
+<div class="section">
+<h2>Perbandingan Class Modifiers</h2>
+
+<ul>
+  <li><b>sealed</b>: Tidak bisa di-extend dan di-implement dari luar file, hanya bisa di dalam file yang sama.</li>
+  
+  <li><b>base</b>: Bisa di-extend di luar, tetapi tidak bisa di-implement di luar. Di dalam file masih bisa keduanya.</li>
+  
+  <li><b>final</b>: Tidak bisa di-extend di luar, tetapi masih bisa digunakan di dalam file.</li>
+  
+  <li><b>(default)</b>: Tidak memiliki batasan, bisa di-extend dan di-implement di mana saja.</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Praktik 1 : Sealed Class dengan Pattern Matching</h2>
+<p>Memudahkan pengecekan kondisi dengan switch yang aman.</p>
   
 <div class="preview-box">
 <pre>
@@ -568,133 +507,139 @@ Akses terhadap data tersebut dilakukan menggunakan getter dan setter, dimana set
 // NIM   : 251410029
 // Kelas : SI2A
   
-class User {
-  String _username = "";
-  String _password = "";
-  String _email = "";
+sealed class LoginStatus {
+  const LoginStatus();
+}
 
-  String get username => _username;
-  String get password => _password;
-  String get email => _email;
+class LoggingIn extends LoginStatus {
+  const LoggingIn();
+}
 
-  set username(String value) {
-    if (value.length >= 5) {
-      _username = value;
-    } else {
-      print("Username minimal 5 karakter");
-    }
-  }
+class Success extends LoginStatus {
+  final String username;
+  const Success(this.username);
+}
 
-  set password(String value) {
-    if (value.length >= 8) {
-      _password = value;
-    } else {
-      print("Password minimal 8 karakter");
-    }
-  }
+class Error extends LoginStatus {
+  final String message;
+  const Error(this.message);
+}
 
-  set email(String value) {
-    if (value.contains("@")) {
-      _email = value;
-    } else {
-      print("Email harus mengandung @");
-    }
+void handleStatus(LoginStatus status) {
+  switch (status) {
+    case LoggingIn():
+      print('Logging in...');
+    case Success(:final username):
+      print('Welcome, $username');
+    case Error(:final message):
+      print('Login failed: $message');
   }
 }
 
 void main() {
-  var user = User();
+  final states = <LoginStatus>[
+    LoggingIn(),
+    Success('Putri'),
+    Error('Wrong password'),
+  ];
 
-  user.username = "putri1412";
-  user.password = "55695678";
-  user.email = "putri@gmail.com";
-
-  print("Username: ${user.username}");
-  print("Password: ${user.password}");
-  print("Email: ${user.email}");
+  for (var state in states) {
+    handleStatus(state);
+  }
 }
 </pre>
 </div>
 
-<button class="btn-run" onclick="openPopup('2fc545480d9f797ab3e7d4bf8004f538')">
+<button class="btn-run" onclick="openPopup('a1aa6888ead4512767e7202cb9fe1315')">
 Run di DartPad
 </button>
 </div>
 
 <div class="section">
-<h2>Sistem Login Sederhana</h2>
-<p>
-Contoh ini menunjukkan penerapan enkapsulasi pada sistem login sederhana, dimana username dan password disimpan sebagai variabel private dan proses login dilakukan melalui method dalam class.
-</p>
-  
+<h2>Studi Kasus : Sistem State Management</h2>
+<p>Digunakan untuk mengatur state aplikasi secara aman.</p>
 <div class="preview-box">
 <pre>
 // Nama  : Putri Ananda Amelia
 // NIM   : 251410029
 // Kelas : SI2A
-class User {
-  String _username;
-  String _password;
 
-  User(this._username, this._password);
+sealed class DataState {}
 
-  String get username => _username;
+class LoadingData extends DataState {}
 
-  bool login(String username, String password) {
-    return _username == username && _password == password;
-  }
+class DataLoaded extends DataState {
+  final List<String> data;
+  DataLoaded(this.data);
+}
 
-  void gantiPassword(String lama, String baru) {
-    if (_password == lama) {
-      if (baru.length >= 8) {
-        _password = baru;
-        print('Password berhasil diubah.');
-      } else {
-        print('Password baru minimal 8 karakter.');
-      }
-    } else {
-      print('Password lama tidak sesuai.');
-    }
+class DataError extends DataState {
+  final String message;
+  DataError(this.message);
+}
+
+void updateUI(DataState state) {
+  switch (state) {
+    case LoadingData():
+      showLoading();
+    case DataLoaded(:final data):
+      showData(data);
+    case DataError(:final message):
+      showError(message);
   }
 }
 
-void main() {
-  final user1 = User('admin_user', 'password445');
+void showLoading() {
+  print('⏳ Loading data...');
+}
 
-  print('User: ${user1.username}');
-
-  if (user1.login('admin_user', 'password445')) {
-    print('Login berhasil');
-  } else {
-    print('Login gagal');
+void showData(List<String> data) {
+  print('✅ Data loaded:');
+  for (int i = 0; i < data.length; i++) {
+    print('   ${i + 1}. ${data[i]}');
   }
+}
 
-  user1.gantiPassword('password445', 'passwordBaru006');
+void showError(String message) {
+  print('❌ Error: $message');
+}
+
+void main() {
+  final states = <DataState>[
+    LoadingData(),
+    DataLoaded(['Data 1', 'Data 2']),
+    DataError('Gagal memuat data'),
+  ];
+
+  for (var state in states) {
+    updateUI(state);
+  }
 }
 </pre>
 </div>
 
-<button class="btn-run" onclick="openPopup('f5ec948876138fa4eb73b11b33af466e')">
+<button class="btn-run" onclick="openPopup('c8d5d793325df3199f29a988771f0800')">
 Run di DartPad
 </button>
 </div>
-
-
 
 <div class="section">
 <h2>Kesimpulan</h2>
 <p>
-Berdasarkan materi yang dipelajari, dapat disimpulkan bahwa constructor digunakan untuk menginisialisasi objek saat sebuah class dibuat. Dalam bahasa Dart terdapat beberapa jenis constructor seperti default constructor, named constructor, dan constant constructor yang dapat digunakan sesuai kebutuhan program.
-Selain itu, konsep enkapsulasi digunakan untuk melindungi data dalam sebuah class dengan membatasi akses langsung terhadap variabel menggunakan private variable, getter, dan setter. Dengan menerapkan konsep ini, program menjadi lebih terstruktur, aman, dan mudah dikelola.
+Sealed class cocok untuk membuat tipe data dengan hierarki terbatas agar pattern matching aman.
+Base class digunakan untuk membuat class dasar yang bisa diturunkan di framework atau aplikasi.
+Final class cocok untuk utility class yang tidak boleh diturunkan atau diimplementasi dari luar.
 </p>
 </div>
 
+
 <div class="section">
-<h2>Bonus 3: Class Rekening Bank</h2>
+<h2>Bonus: Base Class Repository (CRUD)</h2>
 <p>
-Program ini membuat kelas RekeningBank menggunakan konsep enkapsulasi dalam OOP.
-Kelas ini memiliki field private _nomorRekening dan _saldo.
-Terdapat method deposit(), tarik(), dan cekSaldo() untuk mengelola saldo dengan aman sehingga saldo tidak bisa menjadi negatif.
+<ul>
+<li>Berisi method CRUD (create, read, update, delete)</li>
+<li>Menggunakan base</li>
+</ul>
 </p>
 
 <div class="preview-box">
@@ -702,52 +647,147 @@ Terdapat method deposit(), tarik(), dan cekSaldo() untuk mengelola saldo dengan 
 // Nama  : Putri Ananda Amelia
 // NIM   : 251410029
 // Kelas : SI2A
-  
-class RekeningBank {
-  String _nomorRekening;
-  double _saldo;
 
-  RekeningBank(this._nomorRekening, this._saldo);
-
-  void deposit(double jumlah) {
-    if (jumlah > 0) {
-      _saldo += jumlah;
-      print("Deposit berhasil: Rp$jumlah");
-    }
+// repository.dart
+base class Repository {
+  void create(String data) {
+    print("Create data: $data");
   }
 
-  void tarik(double jumlah) {
-    if (jumlah > 0 && jumlah <= _saldo) {
-      _saldo -= jumlah;
-      print("Penarikan berhasil: Rp$jumlah");
-    }
+  void read() {
+    print("Read data");
   }
 
-  void cekSaldo() {
-    print("Nomor Rekening: $_nomorRekening");
-    print("Saldo saat ini: Rp$_saldo");
+  void update(String data) {
+    print("Update data: $data");
   }
-}
 
-void main() {
-  RekeningBank rekening = RekeningBank("4567890", 400000);
-
-  rekening.deposit(200000);
-  rekening.tarik(100000);
-  rekening.cekSaldo();
+  void delete(String data) {
+    print("Delete data: $data");
+  }
 }
 </pre>
 </div>
 
-<button class="btn-run" onclick="openPopup('8784a60a54a9528480ae4a77347fa97d')">
-Run di DartPad
+<p>
+<ul>
+<li>UserRepository turunan dari Repository (extends)</li>
+<li>Override method create</li>
+<li>main() untuk menjalankan program</li>
+</ul>
+</p>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'repository.dart';
+
+base class UserRepository extends Repository {
+  @override
+  void create(String data) {
+    print("User created: $data");
+  }
+}
+
+void main() {
+  var repo = UserRepository();
+  repo.create("Putri Ananda");
+  repo.read();
+  repo.update("Data Baru");
+  repo.delete("Data Lama");
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openImagePopup('gambar4.png')">
+Klik Lihat Output
 </button>
 </div>
+
+
+<div class="section">
+<h2>Bonus: Final Class MathUtils (Static Methods)</h2>
+
+<p>
+<ul>
+<li>Menggunakan final</li>
+<li>Tidak bisa diwariskan</li>
+<li>Berisi operasi matematika (tambah,kurang,kali,bagi)</li>
+</ul>
+</p>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+
+// math_utils.dart
+final class MathUtils {
+  static int tambah(int a, int b) {
+    return a + b;
+  }
+
+  static int kurang(int a, int b) {
+    return a - b;
+  }
+
+  static int kali(int a, int b) {
+    return a * b;
+  }
+
+  static double bagi(int a, int b) {
+    return a / b;
+  }
+}
+</pre>
+</div>
+
+<p>
+<ul>
+<li>Menjalankan method dari MathUtils</li>
+<li>Tidak perlu membuat objek</li>
+</ul>
+</p>
+
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'math_utils.dart';
+
+void main() {
+  print(MathUtils.tambah(10, 5));
+  print(MathUtils.kurang(10, 5));
+  print(MathUtils.kali(10, 5));
+  print(MathUtils.bagi(10, 5));
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openImagePopup('gambar5.png')">
+Klik Lihat Output
+</button>
+</div>
+
 
 <div class="popup" id="popup">
   <div class="popup-box">
     <span class="close" onclick="closePopup()">❌</span>
     <iframe id="dartFrame"></iframe>
+  </div>
+</div>
+
+<div class="popup" id="imagePopup">
+  <div class="popup-box image-box">
+    <span class="close" onclick="closeImagePopup()">❌</span>
+    <img id="popupImg">
   </div>
 </div>
 
@@ -761,6 +801,16 @@ function openPopup(id){
 function closePopup(){
   document.getElementById("popup").style.display="none";
   document.getElementById("dartFrame").src="";
+}
+
+function openImagePopup(src){
+  document.getElementById("imagePopup").style.display="flex";
+  document.getElementById("popupImg").src=src;
+}
+
+function closeImagePopup(){
+  document.getElementById("imagePopup").style.display="none";
+  document.getElementById("popupImg").src="";
 }
 </script>
 
