@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -137,7 +136,17 @@ iframe{
   object-fit:contain;
   border-radius:8px;
 }
+.judul-success {
+  color: #ffd700; /* kuning */
+  font-size: 18px;
+  margin-top: 10px;
+}
 
+.judul-error {
+  color: #ff0000; /* merah */
+  font-size: 18px;
+  margin-top: 20px;
+}
 </style>
 </head>
 
@@ -334,12 +343,14 @@ class Error extends ApiResponse {
 }
 </pre>
 </div>
+</div>
 
-
+<div class="section">
 <h2>Penggunaan Sealed Class</h2>
 <p>Digunakan untuk kontrol tipe dan pengecekan kondisi dengan aman.</p>
+<h3 class="judul-success">✔ Success</h3>
 
- <div class="preview-box">
+<div class="preview-box">
 <pre>
 // Nama  : Putri Ananda Amelia
 // NIM   : 251410029
@@ -363,9 +374,33 @@ void main() {
 </div>
 
 <button class="btn-run" onclick="openImagePopup('gambar1.png')">
-Klik Lihat Output
+Klik Output Succes
+</button>
+
+<h3 class="judul-error">❌ Error</h3>
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'libsealed.dart';
+
+//ERROR
+class Pending extends ApiResponse {
+  final String message;
+  Pending(this.message);
+}
+
+void main() {}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openImagePopup('eror1.png')">
+Klik Output Error
 </button>
 </div>
+
 
 <div class="section">
 <h2>Base Class</h2>
@@ -383,9 +418,12 @@ base class Animal {
 }
 </pre>
 </div>
+</div>
 
+<div class="section">
 <h2>Pengggunaan Base Class</h2>
 <p>Subclass harus pakai extends, bukan implements.</p>
+<h3 class="judul-success">✔ Success</h3>
 
 <div class="preview-box">
 <pre>
@@ -421,14 +459,40 @@ void main() {
 
 
 <button class="btn-run" onclick="openImagePopup('gambar2.png')">
-Klik Lihat Output
+Klik Output Success
+</button>
+
+<h3 class="judul-error">❌ Error</h3>
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'libbase.dart';
+
+// ERROR
+base class BigAnimal implements Animal {
+  @override
+  void speak() {
+    print("Geer!");
+  }
+}
+
+void main() {}
+</pre>
+</div>
+
+
+<button class="btn-run" onclick="openImagePopup('eror2.png')">
+Klik Output Error
 </button>
 </div>
 
 <div class="section">
 <h2>Final Class</h2>
 <p>Final class tidak bisa diwarisi dari luar file</p>
-  
+
 <div class="preview-box">
 <pre>
 // Nama  : Putri Ananda Amelia
@@ -453,12 +517,12 @@ base class CustomSettings extends Settings {
 }
 </pre>
 </div>
+</div>
 
-
-
+<div class="section">
 <h2>Penggunaan Final Class</h2>
 <p>Class final hanya bisa dipakai langsung, tidak bisa dibuat turunan di luar.</p>
-
+<h3 class="judul-success">✔ Success</h3>
 
 <div class="preview-box">
 <pre>
@@ -479,7 +543,31 @@ void main() {
 </div>
 
 <button class="btn-run" onclick="openImagePopup('gambar3.png')">
-Klik Lihat Output
+Klik Output Success
+</button>
+
+<h3 class="judul-error">❌ Error</h3>
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'libfinal.dart';
+
+// ERROR
+class CustomSettingsNew extends Settings {
+  CustomSettingsNew(String theme, int fontSize)
+      : super(theme: theme, fontSize: fontSize);
+}
+
+void main() {}
+
+</pre>
+</div>
+
+<button class="btn-run" onclick="openImagePopup('eror3.png')">
+Klik Output Error
 </button>
 </div>
 
@@ -677,6 +765,7 @@ base class Repository {
 </ul>
 </p>
 
+<h3 class="judul-success">✔ Success</h3>
 <div class="preview-box">
 <pre>
 // Nama  : Putri Ananda Amelia
@@ -703,7 +792,41 @@ void main() {
 </div>
 
 <button class="btn-run" onclick="openImagePopup('gambar4.png')">
-Klik Lihat Output
+Klik Output Success
+</button>
+
+<h3 class="judul-error">❌ Error</h3>
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'repository.dart';
+
+// ERROR
+base class UserRepository implements Repository {
+  @override
+  void create(String data) {
+    print("Create: $data");
+  }
+
+  @override
+  void read() {}
+
+  @override
+  void update(String data) {}
+
+  @override
+  void delete(String data) {}
+}
+
+void main() {}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openImagePopup('eror4.png')">
+Klik Output Error
 </button>
 </div>
 
@@ -754,6 +877,7 @@ final class MathUtils {
 </ul>
 </p>
 
+<h3 class="judul-success">✔ Success</h3>
 <div class="preview-box">
 <pre>
 // Nama  : Putri Ananda Amelia
@@ -772,7 +896,27 @@ void main() {
 </div>
 
 <button class="btn-run" onclick="openImagePopup('gambar5.png')">
-Klik Lihat Output
+Klik Output Success
+</button>
+
+<h3 class="judul-error">❌ Error</h3>
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+
+import 'math_utils.dart';
+
+// ERROR
+class AdvancedMath extends MathUtils {}
+
+void main() {}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openImagePopup('eror5.png')">
+Klik Output Error
 </button>
 </div>
 
